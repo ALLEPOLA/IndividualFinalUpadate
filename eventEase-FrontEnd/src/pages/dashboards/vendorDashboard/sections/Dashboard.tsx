@@ -49,7 +49,7 @@ export const Dashboard = () => {
 
   if (loading) {
     return (
-      <div className="p-6">
+      <div className="p-6 bg-white min-h-screen">
         <div className="animate-pulse">
           <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
@@ -88,7 +88,7 @@ export const Dashboard = () => {
   const { servicePerformance, teamUtilization, businessGrowth } = businessInsights;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-white min-h-screen">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

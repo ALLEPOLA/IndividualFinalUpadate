@@ -81,11 +81,23 @@ export const Payments = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <h1 className="text-2xl font-bold text-gray-900 mb-6">Payments</h1>
-        <div className="flex items-center justify-center py-12">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-          <span className="ml-2 text-gray-600">Loading payment data...</span>
+      <div className="p-6 relative overflow-hidden">
+        {/* Minimal Floating Decorative Elements */}
+        <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+        <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+        
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold text-purple-700 mb-2">
+            💳 Payments
+          </h1>
+          <p className="text-gray-600 mb-8">Manage your event payments and transactions</p>
+          {/* Light Purple Underline */}
+          <div className="w-20 h-0.5 bg-purple-300 rounded-full mb-8"></div>
+          
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+            <span className="ml-2 text-gray-600">Loading payment data...</span>
+          </div>
         </div>
       </div>
     );
@@ -94,16 +106,28 @@ export const Payments = () => {
   const filteredEvents = getFilteredEvents();
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Payments</h1>
-        <button
-          onClick={loadEvents}
-          className="px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors"
-        >
-          Refresh
-        </button>
-      </div>
+    <div className="p-6 relative overflow-hidden">
+      {/* Minimal Floating Decorative Elements */}
+      <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+      
+      <div className="relative z-10">
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-3xl font-bold text-purple-700 mb-2">
+              💳 Payments
+            </h1>
+            <p className="text-gray-600">Manage your event payments and transactions</p>
+            {/* Light Purple Underline */}
+            <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+          </div>
+          <button
+            onClick={loadEvents}
+            className="px-4 py-2 text-sm font-medium text-purple-600 bg-purple-50 border border-purple-200 rounded-lg hover:bg-purple-100 transition-all duration-300"
+          >
+            🔄 Refresh
+          </button>
+        </div>
 
       {/* Filter Tabs */}
       <div className="mb-6">
@@ -117,9 +141,9 @@ export const Payments = () => {
               <button
                 key={tab.key}
                 onClick={() => setFilter(tab.key as any)}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-all duration-300 ${
                   filter === tab.key
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-purple-500 text-purple-600'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                 }`}
               >
@@ -133,11 +157,7 @@ export const Payments = () => {
       {/* Payment Cards */}
       {filteredEvents.length === 0 ? (
         <div className="text-center py-12">
-          <div className="mx-auto h-12 w-12 text-gray-400">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
+          <div className="text-6xl mb-4">💳</div>
           <h3 className="mt-2 text-sm font-medium text-gray-900">No payments found</h3>
           <p className="mt-1 text-sm text-gray-500">
             {filter === 'all' ? 'You don\'t have any events yet.' : `No ${filter.replace('_', ' ')} payments found.`}
@@ -146,7 +166,7 @@ export const Payments = () => {
       ) : (
         <div className="space-y-4">
           {filteredEvents.map((event) => (
-            <div key={event.id} className="bg-white rounded-lg shadow border border-gray-200 p-6">
+            <div key={event.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">{event.name}</h3>
@@ -160,26 +180,38 @@ export const Payments = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 {/* Total Amount */}
-                <div className="bg-gray-50 rounded-lg p-4">
-                  <p className="text-sm font-medium text-gray-600">Total Amount</p>
+                <div className="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                  <p className="text-sm font-medium text-gray-600 flex items-center">
+                    <span className="mr-1">💰</span>
+                    Total Amount
+                  </p>
                   <p className="text-lg font-semibold text-gray-900">${Number(event.total_amount || 0).toFixed(2)}</p>
                 </div>
 
                 {/* Advance Amount */}
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <p className="text-sm font-medium text-blue-600">Advance Amount</p>
+                <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                  <p className="text-sm font-medium text-blue-600 flex items-center">
+                    <span className="mr-1">📋</span>
+                    Advance Amount
+                  </p>
                   <p className="text-lg font-semibold text-blue-900">${Number(event.advance_amount || 0).toFixed(2)}</p>
                 </div>
 
                 {/* Paid Amount */}
-                <div className="bg-green-50 rounded-lg p-4">
-                  <p className="text-sm font-medium text-green-600">Paid Amount</p>
+                <div className="bg-green-50 rounded-lg p-4 border border-green-100">
+                  <p className="text-sm font-medium text-green-600 flex items-center">
+                    <span className="mr-1">✅</span>
+                    Paid Amount
+                  </p>
                   <p className="text-lg font-semibold text-green-900">${Number(event.paid_amount || 0).toFixed(2)}</p>
                 </div>
 
                 {/* Amount to Pay */}
-                <div className="bg-yellow-50 rounded-lg p-4">
-                  <p className="text-sm font-medium text-yellow-600">Amount to Pay</p>
+                <div className="bg-yellow-50 rounded-lg p-4 border border-yellow-100">
+                  <p className="text-sm font-medium text-yellow-600 flex items-center">
+                    <span className="mr-1">⏳</span>
+                    Amount to Pay
+                  </p>
                   <p className="text-lg font-semibold text-yellow-900">${getAmountToPay(event).toFixed(2)}</p>
                 </div>
               </div>
@@ -209,6 +241,7 @@ export const Payments = () => {
           ))}
         </div>
       )}
+      </div>
     </div>
   );
 };

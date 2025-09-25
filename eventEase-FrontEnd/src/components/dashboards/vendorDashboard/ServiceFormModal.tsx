@@ -80,6 +80,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
         setCategoriesLoading(true);
         try {
           const response = await getAllCategories();
+          console.log('Categories response:', response);
           if (response.success && response.data) {
             setCategories(response.data as ServiceCategory[]);
           }
@@ -160,15 +161,23 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold">
+    <div className="fixed inset-0 bg-gradient-to-br from-purple-900/60 via-pink-900/50 to-purple-800/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fadeIn">
+      {/* Floating Decorative Elements */}
+      <div className="absolute top-10 left-10 text-3xl animate-bounce opacity-40" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute top-20 right-16 text-2xl animate-bounce opacity-40" style={{ animationDelay: '1.5s' }}>🌟</div>
+      <div className="absolute bottom-32 left-16 text-2xl animate-bounce opacity-40" style={{ animationDelay: '2s' }}>💫</div>
+      <div className="absolute bottom-20 right-10 text-3xl animate-bounce opacity-40" style={{ animationDelay: '2.5s' }}>⭐</div>
+      <div className="absolute top-1/3 right-1/4 text-2xl animate-bounce opacity-40" style={{ animationDelay: '3s' }}>✨</div>
+      <div className="absolute bottom-1/3 left-1/4 text-2xl animate-bounce opacity-40" style={{ animationDelay: '3.5s' }}>🌟</div>
+      
+      <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto border border-purple-200/50 transform transition-all duration-300 animate-slideInUp hover:shadow-3xl">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gradient-to-r from-purple-50 to-pink-50">
+          <h2 className="text-xl font-semibold text-purple-700 animate-pulse">
             {isEdit ? 'Edit Service' : 'Create New Service'}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 hover:text-purple-600 transition-all duration-300 transform hover:scale-110 hover:rotate-90 p-2 rounded-full hover:bg-purple-50"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -176,7 +185,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
           </button>
         </div>
 
-        <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-6">
+        <form onSubmit={handleSubmit(onFormSubmit)} className="p-6 space-y-6 animate-fadeIn" style={{ animationDelay: '0.2s' }}>
           {/* Service Name */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -201,7 +210,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                   {...field}
                   type="text"
                   id="name"
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                     errors.name ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Enter service name"
@@ -233,7 +242,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                   {...field}
                   id="description"
                   rows={4}
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                     errors.description ? 'border-red-500' : 'border-gray-300'
                   }`}
                   placeholder="Describe your service (minimum 10 characters)"
@@ -261,7 +270,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                   {...field}
                   id="category_id"
                   disabled={categoriesLoading}
-                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed ${
+                  className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed ${
                     errors.category_id ? 'border-red-500' : 'border-gray-300'
                   }`}
                 >
@@ -309,7 +318,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                     id="base_price"
                     min="0"
                     step="0.01"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                       errors.base_price ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="0.00"
@@ -342,7 +351,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                     id="price_per_hour"
                     min="0"
                     step="0.01"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                       errors.price_per_hour ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="0.00"
@@ -377,7 +386,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                     type="number"
                     id="capacity"
                     min="1"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                       errors.capacity ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="1"
@@ -414,7 +423,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                     id="advance_percentage"
                     min="0"
                     max="100"
-                    className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300 hover:shadow-sm ${
                       errors.advance_percentage ? 'border-red-500' : 'border-gray-300'
                     }`}
                     placeholder="0"
@@ -450,7 +459,7 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
                   onBlur={field.onBlur}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded transition-all duration-300 hover:scale-110"
                 />
               )}
             />
@@ -464,14 +473,14 @@ export const ServiceFormModal: React.FC<ServiceFormModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="px-6 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-lg hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105 hover:shadow-md"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isLoading || !isValid}
-              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-3 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-purple-700 border border-transparent rounded-lg hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
             >
               {isLoading ? 'Saving...' : (isEdit ? 'Update Service' : 'Create Service')}
             </button>

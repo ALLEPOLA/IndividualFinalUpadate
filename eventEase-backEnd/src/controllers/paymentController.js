@@ -54,8 +54,8 @@ const createCheckoutSession = async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.FRONTEND_URL || 'http://localhost:5174'}/payment-success?session_id={CHECKOUT_SESSION_ID}&event_id=${eventId}&payment_type=${paymentType}`,
-      cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5174'}/payment-cancelled?event_id=${eventId}`,
+      success_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/payment-success?session_id={CHECKOUT_SESSION_ID}&event_id=${eventId}&payment_type=${paymentType}`,
+      cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/payment-cancelled?event_id=${eventId}`,
       metadata: {
         eventId: eventId,
         paymentType: paymentType

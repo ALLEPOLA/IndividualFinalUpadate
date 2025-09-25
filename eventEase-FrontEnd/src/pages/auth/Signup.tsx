@@ -89,33 +89,51 @@ function Signup() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create your account
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 flex items-start justify-center pt-8 pb-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Floating Decorative Elements */}
+      <div className="absolute top-10 left-10 text-3xl animate-bounce opacity-60" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute top-20 right-16 text-2xl animate-bounce opacity-60" style={{ animationDelay: '1.5s' }}>🌟</div>
+      <div className="absolute bottom-32 left-16 text-2xl animate-bounce opacity-60" style={{ animationDelay: '2s' }}>💫</div>
+      <div className="absolute bottom-20 right-10 text-3xl animate-bounce opacity-60" style={{ animationDelay: '2.5s' }}>⭐</div>
+      <div className="absolute top-1/3 right-1/4 text-2xl animate-bounce opacity-60" style={{ animationDelay: '3s' }}>✨</div>
+      <div className="absolute bottom-1/3 left-1/4 text-2xl animate-bounce opacity-60" style={{ animationDelay: '3.5s' }}>🌟</div>
+      
+      <div className="max-w-2xl w-full space-y-4 relative z-10">
+        <div className="text-center">
+          {/* Welcome Icon */}
+          <div className="text-6xl mb-4 animate-bounce">🎊</div>
+          
+          <h2 className="text-center text-4xl font-extrabold text-purple-600 mb-2">
+            Join EventEase!
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          
+          {/* Purple Underline */}
+          <div className="w-24 h-1 bg-purple-500 mx-auto rounded-full mb-4"></div>
+          
+          <p className="text-lg text-gray-600 mb-2">
+            Create your account
+          </p>
+          <p className="text-sm text-gray-600">
             Or{' '}
             <Link
               to="/login"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-purple-600 hover:text-purple-500 transition-colors duration-300"
             >
               sign in to your existing account
             </Link>
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-2 space-y-4" onSubmit={handleSubmit(onSubmit)}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-md">
+            <div className="bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-lg shadow-md animate-pulse">
               {error}
             </div>
           )}
 
           {/* Role Selection */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Choose your role</h3>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-lg font-medium text-purple-600 mb-4">🎯 Choose your role</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="relative">
                 <input
@@ -128,12 +146,13 @@ function Signup() {
                   }}
                   className="sr-only"
                 />
-                <div className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                <div className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-105 ${
                   selectedRole === 'user' 
-                    ? 'border-blue-500 bg-blue-50' 
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-purple-500 bg-purple-50 shadow-md' 
+                    : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}>
                   <div className="text-center">
+                    <div className="text-2xl mb-2">🎉</div>
                     <h4 className="font-medium text-gray-900">Event Creator</h4>
                     <p className="text-sm text-gray-600 mt-1">
                       Create and manage your events
@@ -153,12 +172,13 @@ function Signup() {
                   }}
                   className="sr-only"
                 />
-                <div className={`p-4 border-2 rounded-lg cursor-pointer transition-colors ${
+                <div className={`p-4 border-2 rounded-xl cursor-pointer transition-all duration-300 hover:scale-105 ${
                   selectedRole === 'vendor' 
-                    ? 'border-blue-500 bg-blue-50' 
-                    : 'border-gray-200 hover:border-gray-300'
+                    ? 'border-purple-500 bg-purple-50 shadow-md' 
+                    : 'border-gray-200 hover:border-gray-300 hover:shadow-md'
                 }`}>
                   <div className="text-center">
+                    <div className="text-2xl mb-2">🏢</div>
                     <h4 className="font-medium text-gray-900">Service Vendor</h4>
                     <p className="text-sm text-gray-600 mt-1">
                       Provide services for events
@@ -170,13 +190,13 @@ function Signup() {
           </div>
 
           {/* User Information */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Personal Information</h3>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-lg font-medium text-purple-600 mb-4">👤 Personal Information</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* First Name */}
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
-                  First Name *
+              <div className="group">
+                <label htmlFor="firstName" className="block text-sm font-medium text-purple-600 mb-2">
+                  👤 First Name *
                 </label>
                 <input
                   {...register('firstName', {
@@ -187,13 +207,13 @@ function Signup() {
                     },
                   })}
                   type="text"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.firstName ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your first name"
                 />
                 {errors.firstName && (
-                  <p className="mt-1 text-sm text-red-600">{errors.firstName.message}</p>
+                  <p className="mt-2 text-sm text-red-600 animate-pulse">{errors.firstName.message}</p>
                 )}
               </div>
 
@@ -211,7 +231,7 @@ function Signup() {
                     },
                   })}
                   type="text"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.lastName ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your last name"
@@ -235,7 +255,7 @@ function Signup() {
                     },
                   })}
                   type="tel"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.phone ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your phone number"
@@ -259,7 +279,7 @@ function Signup() {
                     },
                   })}
                   type="email"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.email ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your email"
@@ -273,8 +293,8 @@ function Signup() {
 
           {/* Vendor Information - Only show if vendor is selected */}
           {selectedRole === 'vendor' && (
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Business Information</h3>
+            <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
+              <h3 className="text-lg font-medium text-purple-600 mb-4">🏢 Business Information</h3>
               <div className="space-y-4">
                 {/* Business Name */}
                 <div>
@@ -286,7 +306,7 @@ function Signup() {
                       required: selectedRole === 'vendor' ? 'Business name is required' : false,
                     })}
                     type="text"
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                       errors.businessName ? 'border-red-300' : 'border-gray-300'
                     }`}
                     placeholder="Enter your business name"
@@ -306,7 +326,7 @@ function Signup() {
                       required: selectedRole === 'vendor' ? 'Business description is required' : false,
                     })}
                     rows={3}
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                       errors.description ? 'border-red-300' : 'border-gray-300'
                     }`}
                     placeholder="Describe your business and services"
@@ -326,7 +346,7 @@ function Signup() {
                       required: selectedRole === 'vendor' ? 'Business address is required' : false,
                     })}
                     type="text"
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                       errors.address ? 'border-red-300' : 'border-gray-300'
                     }`}
                     placeholder="Enter your business address"
@@ -347,7 +367,7 @@ function Signup() {
                         required: selectedRole === 'vendor' ? 'City is required' : false,
                       })}
                       type="text"
-                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                         errors.city ? 'border-red-300' : 'border-gray-300'
                       }`}
                       placeholder="City"
@@ -367,7 +387,7 @@ function Signup() {
                         required: selectedRole === 'vendor' ? 'Province is required' : false,
                       })}
                       type="text"
-                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                         errors.province ? 'border-red-300' : 'border-gray-300'
                       }`}
                       placeholder="Province"
@@ -391,7 +411,7 @@ function Signup() {
                         },
                       })}
                       type="text"
-                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                         errors.postalCode ? 'border-red-300' : 'border-gray-300'
                       }`}
                       placeholder="A1A 1A1"
@@ -417,7 +437,7 @@ function Signup() {
                       },
                     })}
                     type="number"
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                       errors.capacity ? 'border-red-300' : 'border-gray-300'
                     }`}
                     placeholder="Maximum number of people you can serve"
@@ -440,7 +460,7 @@ function Signup() {
                       },
                     })}
                     type="url"
-                    className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                       errors.websiteUrl ? 'border-red-300' : 'border-gray-300'
                     }`}
                     placeholder="https://your-website.com"
@@ -461,7 +481,7 @@ function Signup() {
                         required: selectedRole === 'vendor' ? 'Business registration number is required' : false,
                       })}
                       type="text"
-                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                         errors.businessRegistrationNumber ? 'border-red-300' : 'border-gray-300'
                       }`}
                       placeholder="Enter registration number"
@@ -481,7 +501,7 @@ function Signup() {
                         required: selectedRole === 'vendor' ? 'Business license number is required' : false,
                       })}
                       type="text"
-                      className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                         errors.businessLicenseNumber ? 'border-red-300' : 'border-gray-300'
                       }`}
                       placeholder="Enter license number"
@@ -496,8 +516,8 @@ function Signup() {
           )}
 
           {/* Password Section */}
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h3 className="text-lg font-medium text-gray-900 mb-4">Account Security</h3>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
+            <h3 className="text-lg font-medium text-purple-600 mb-4">🔒 Account Security</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {/* Password */}
               <div>
@@ -513,7 +533,7 @@ function Signup() {
                     },
                   })}
                   type="password"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.password ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Create a password"
@@ -535,7 +555,7 @@ function Signup() {
                       value === password || 'Passwords do not match',
                   })}
                   type="password"
-                  className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Confirm your password"
@@ -549,22 +569,39 @@ function Signup() {
 
           {/* Role is now properly set through setValue in the radio button handlers */}
 
-          <div>
+          {/* Enhanced Submit Button */}
+          <div className="relative">
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="group relative w-full flex justify-center py-4 px-6 border border-transparent text-lg font-semibold rounded-xl text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              {isLoading ? 'Creating account...' : 'Create account'}
+              <span className="flex items-center">
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Creating account...
+                  </>
+                ) : (
+                  <>
+                    🎉 Create account
+                  </>
+                )}
+              </span>
             </button>
           </div>
 
+          {/* Enhanced Back Link */}
           <div className="text-center">
             <Link
               to="/"
-              className="text-sm text-gray-600 hover:text-gray-500"
+              className="inline-flex items-center text-sm text-gray-600 hover:text-purple-600 transition-colors duration-300 group"
             >
-              ← Back to home
+              <span className="mr-2 group-hover:-translate-x-1 transition-transform duration-300">←</span>
+              Back to home
             </Link>
           </div>
         </form>

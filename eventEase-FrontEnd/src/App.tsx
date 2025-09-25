@@ -2,7 +2,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { WebSocketProvider } from './contexts/WebSocketContext'
-import Navigation from './components/Navigation'
+import Header from './components/Header'
 import Homepage from './pages/homepage/homepage'
 import About from './pages/about/about'
 import Contact from './pages/contact/contact'
@@ -23,7 +23,7 @@ const AppContent = () => {
   
   return (
     <div className="App">
-      {!hideNavigation && <Navigation />}
+      {!hideNavigation && <Header />}
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />

@@ -147,76 +147,79 @@ export const AllEvents = () => {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">All Events</h1>
+    <div className="p-6 relative overflow-hidden">
+      {/* Minimal Floating Decorative Elements */}
+      <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+      
+      <div className="mb-8 relative z-10">
+        <h1 className="text-3xl font-bold text-purple-700 mb-2">
+          📅 All Events
+        </h1>
         <p className="text-gray-600">
           Manage and track all your events in one place
         </p>
+        {/* Light Purple Underline */}
+        <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 relative z-10">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
-            <div className="bg-blue-100 rounded-full p-3 mr-4">
-              <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <span className="text-xl text-blue-600">📅</span>
             </div>
-            <div>
+            <div className="ml-4">
               <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              <p className="text-sm text-gray-600">Total Events</p>
+              <p className="text-sm font-medium text-gray-600">Total Events</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
-            <div className="bg-yellow-100 rounded-full p-3 mr-4">
-              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div className="p-2 bg-yellow-100 rounded-lg">
+              <span className="text-xl text-yellow-600">⏳</span>
             </div>
-            <div>
+            <div className="ml-4">
               <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
-              <p className="text-sm text-gray-600">Pending</p>
+              <p className="text-sm font-medium text-gray-600">Pending</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
-            <div className="bg-green-100 rounded-full p-3 mr-4">
-              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+            <div className="p-2 bg-green-100 rounded-lg">
+              <span className="text-xl text-green-600">✅</span>
             </div>
-            <div>
+            <div className="ml-4">
               <p className="text-2xl font-bold text-gray-900">{stats.confirmed}</p>
-              <p className="text-sm text-gray-600">Confirmed</p>
+              <p className="text-sm font-medium text-gray-600">Confirmed</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
-            <div className="bg-red-100 rounded-full p-3 mr-4">
-              <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+            <div className="p-2 bg-red-100 rounded-lg">
+              <span className="text-xl text-red-600">❌</span>
             </div>
-            <div>
+            <div className="ml-4">
               <p className="text-2xl font-bold text-gray-900">{stats.cancelled}</p>
-              <p className="text-sm text-gray-600">Cancelled</p>
+              <p className="text-sm font-medium text-gray-600">Cancelled</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Filters</h2>
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8 relative z-10">
+        <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <span className="text-lg mr-2">🔍</span>
+          Filters
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
@@ -225,7 +228,7 @@ export const AllEvents = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
               placeholder="Search events..."
             />
           </div>
@@ -235,7 +238,7 @@ export const AllEvents = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as Event['status'] | 'all')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
             >
               <option value="all">All Statuses</option>
               <option value="pending">Pending</option>
@@ -249,7 +252,7 @@ export const AllEvents = () => {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
             >
               <option value="all">All Types</option>
               {uniqueTypes.map(type => (
@@ -265,7 +268,7 @@ export const AllEvents = () => {
                 setTypeFilter('all');
                 setSearchQuery('');
               }}
-              className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 text-sm font-medium text-gray-700 bg-gray-100 border-2 border-gray-300 rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300"
             >
               Clear Filters
             </button>
@@ -275,10 +278,8 @@ export const AllEvents = () => {
 
       {/* Events Grid */}
       {filteredEvents.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-12 text-center">
-          <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center relative z-10">
+          <div className="text-6xl mb-4">📅</div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No events found</h3>
           <p className="text-gray-600">
             {events.length === 0 
@@ -288,7 +289,7 @@ export const AllEvents = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
           {filteredEvents.map((event) => (
             <EventCard
               key={event.id}

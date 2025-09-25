@@ -163,7 +163,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="text-center md:text-left">
                 <p className="text-gray-700 font-medium text-sm">Get in Touch</p>
-                <p className="text-gray-500 text-xs">info@eventease.com | +1 (555) 123-4567</p>
+                <p className="text-gray-500 text-xs">prasannaellepola2000@gmail.com | +94757358093</p>
               </div>
             </div>
             <div className="flex items-center space-x-6">
@@ -178,7 +178,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-200 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-2 md:mb-0">
-              © 2024 EventEase. All rights reserved.
+              © 2025 EventEase. All rights reserved.
             </p>
             <p className="text-gray-400 text-xs">
               Connecting event creators with service providers, crafting moments of joy

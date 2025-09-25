@@ -254,37 +254,46 @@ export const CreateEvent = () => {
   ];
 
   return (
-    <div className="p-6">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Create Event</h1>
+    <div className="p-6 relative overflow-hidden">
+      {/* Minimal Floating Decorative Elements */}
+      <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+      
+      <div className="max-w-4xl mx-auto relative z-10">
+        <h1 className="text-3xl font-bold text-purple-700 mb-2">
+          ➕ Create Event
+        </h1>
+        <p className="text-gray-600 mb-8">Plan your perfect event in just a few steps</p>
+        {/* Light Purple Underline */}
+        <div className="w-20 h-0.5 bg-purple-300 rounded-full mb-8"></div>
         
         {/* Stepper */}
         <div className="flex items-center mb-8">
-          <div className={`flex items-center ${currentStep >= 1 ? 'text-blue-600' : 'text-gray-400'}`}>
+          <div className={`flex items-center ${currentStep >= 1 ? 'text-purple-600' : 'text-gray-400'}`}>
             <div className={`rounded-full h-8 w-8 flex items-center justify-center border-2 ${
-              currentStep >= 1 ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'
+              currentStep >= 1 ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300'
             }`}>
               1
             </div>
             <span className="ml-2 font-medium">Event Details</span>
           </div>
           
-          <div className={`flex-1 h-0.5 mx-4 ${currentStep >= 2 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+          <div className={`flex-1 h-0.5 mx-4 ${currentStep >= 2 ? 'bg-purple-600' : 'bg-gray-300'}`}></div>
           
-          <div className={`flex items-center ${currentStep >= 2 ? 'text-blue-600' : 'text-gray-400'}`}>
+          <div className={`flex items-center ${currentStep >= 2 ? 'text-purple-600' : 'text-gray-400'}`}>
             <div className={`rounded-full h-8 w-8 flex items-center justify-center border-2 ${
-              currentStep >= 2 ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'
+              currentStep >= 2 ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300'
             }`}>
               2
             </div>
             <span className="ml-2 font-medium">Select Vendor</span>
           </div>
           
-          <div className={`flex-1 h-0.5 mx-4 ${currentStep >= 3 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
+          <div className={`flex-1 h-0.5 mx-4 ${currentStep >= 3 ? 'bg-purple-600' : 'bg-gray-300'}`}></div>
           
-          <div className={`flex items-center ${currentStep >= 3 ? 'text-blue-600' : 'text-gray-400'}`}>
+          <div className={`flex items-center ${currentStep >= 3 ? 'text-purple-600' : 'text-gray-400'}`}>
             <div className={`rounded-full h-8 w-8 flex items-center justify-center border-2 ${
-              currentStep >= 3 ? 'bg-blue-600 border-blue-600 text-white' : 'border-gray-300'
+              currentStep >= 3 ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300'
             }`}>
               3
             </div>
@@ -294,8 +303,11 @@ export const CreateEvent = () => {
 
         {/* Step Content will be rendered here based on currentStep */}
         {currentStep === 1 && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Event Details</h2>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <span className="text-lg mr-2">📝</span>
+              Event Details
+            </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -306,7 +318,7 @@ export const CreateEvent = () => {
                   type="text"
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   placeholder="Enter event name"
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -319,7 +331,7 @@ export const CreateEvent = () => {
                 <select
                   value={formData.type}
                   onChange={(e) => handleInputChange('type', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                 >
                   <option value="">Select event type</option>
                   {eventTypes.map(type => (
@@ -337,7 +349,7 @@ export const CreateEvent = () => {
                   value={formData.description}
                   onChange={(e) => handleInputChange('description', e.target.value)}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   placeholder="Describe your event"
                 />
                 {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
@@ -351,7 +363,7 @@ export const CreateEvent = () => {
                   type="date"
                   value={formData.date}
                   onChange={(e) => handleInputChange('date', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                 />
                 {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date}</p>}
               </div>
@@ -365,7 +377,7 @@ export const CreateEvent = () => {
                     type="time"
                     value={formData.start_time}
                     onChange={(e) => handleInputChange('start_time', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   />
                   {errors.start_time && <p className="text-red-500 text-sm mt-1">{errors.start_time}</p>}
                 </div>
@@ -378,7 +390,7 @@ export const CreateEvent = () => {
                     type="time"
                     value={formData.end_time}
                     onChange={(e) => handleInputChange('end_time', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   />
                   {errors.end_time && <p className="text-red-500 text-sm mt-1">{errors.end_time}</p>}
                 </div>
@@ -392,7 +404,7 @@ export const CreateEvent = () => {
                   value={formData.special_requirements}
                   onChange={(e) => handleInputChange('special_requirements', e.target.value)}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   placeholder="Any special requirements or notes"
                 />
               </div>
@@ -401,7 +413,7 @@ export const CreateEvent = () => {
             <div className="flex justify-end mt-6">
               <button
                 onClick={handleNextStep}
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
               >
                 Next Step
               </button>
@@ -411,8 +423,11 @@ export const CreateEvent = () => {
 
         {/* Step 2: Select Vendor */}
         {currentStep === 2 && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Select Vendor & Services</h2>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <span className="text-lg mr-2">🏢</span>
+              Select Vendor & Services
+            </h2>
             
             {/* Filters */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -424,7 +439,7 @@ export const CreateEvent = () => {
                   type="text"
                   value={cityFilter}
                   onChange={(e) => setCityFilter(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   placeholder="Enter city name"
                 />
               </div>
@@ -437,7 +452,7 @@ export const CreateEvent = () => {
                   type="number"
                   value={capacityFilter}
                   onChange={(e) => setCapacityFilter(e.target.value ? parseInt(e.target.value) : '')}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300"
                   placeholder="Enter minimum capacity"
                 />
               </div>
@@ -501,7 +516,7 @@ export const CreateEvent = () => {
               </button>
               <button
                 onClick={handleNextStep}
-                className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
               >
                 Next Step
               </button>
@@ -511,8 +526,11 @@ export const CreateEvent = () => {
 
         {/* Step 3: Review & Submit */}
         {currentStep === 3 && (
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Review Event Details</h2>
+          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+              <span className="text-lg mr-2">✅</span>
+              Review Event Details
+            </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left Column - Event Details */}

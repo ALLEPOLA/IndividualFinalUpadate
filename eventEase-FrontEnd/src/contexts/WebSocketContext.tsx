@@ -110,13 +110,14 @@ export const WebSocketProvider: React.FC<WebSocketProviderProps> = ({ children }
   };
 
   useEffect(() => {
-    // Load stored notifications when component mounts
-    loadStoredNotifications();
-    refreshUnreadCount();
-
-    // Connect to WebSocket if token exists
+    // Only load notifications and connect if user is authenticated
     const token = localStorage.getItem('authToken');
     if (token) {
+      // Load stored notifications when component mounts
+      loadStoredNotifications();
+      refreshUnreadCount();
+      
+      // Connect to WebSocket if token exists
       webSocketService.connect();
     }
 

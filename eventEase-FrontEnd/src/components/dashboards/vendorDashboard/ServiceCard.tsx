@@ -29,90 +29,96 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
   return (
     <div
       onClick={() => onView(service)}
-      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer overflow-hidden"
+      className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border border-purple-100/50 transform hover:scale-105 hover:-translate-y-2 group"
     >
       {/* Service Image */}
-      <div className="relative h-48 bg-gray-200">
+      <div className="relative h-48 bg-gradient-to-br from-purple-100 to-pink-100 overflow-hidden">
         {service.image_url ? (
           <img
             src={`http://localhost:5000${service.image_url}`}
             alt={service.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-gray-400">
-            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-              />
-            </svg>
+          <div className="w-full h-full flex items-center justify-center text-purple-300">
+            <div className="text-center">
+              <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <p className="text-sm font-medium">No Image</p>
+            </div>
           </div>
         )}
         
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        
         {/* Status Badge */}
-        <div className="absolute top-2 right-2">
+        <div className="absolute top-3 right-3">
           <span
-            className={`px-2 py-1 text-xs font-medium rounded-full ${
+            className={`px-3 py-1 text-xs font-semibold rounded-full shadow-lg backdrop-blur-sm ${
               service.isActive
-                ? 'bg-green-100 text-green-800'
-                : 'bg-red-100 text-red-800'
+                ? 'bg-green-100/90 text-green-800 border border-green-200'
+                : 'bg-red-100/90 text-red-800 border border-red-200'
             }`}
           >
-            {service.isActive ? 'Active' : 'Inactive'}
+            {service.isActive ? '✓ Active' : '✗ Inactive'}
           </span>
         </div>
       </div>
 
       {/* Service Content */}
-      <div className="p-4">
+      <div className="p-6">
         {/* Service Name and Category */}
-        <div className="mb-2">
-          <h3 className="text-lg font-semibold text-gray-900 mb-1">
+        <div className="mb-3">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-700 transition-colors">
             {service.name}
           </h3>
           {service.category_name && (
-            <span className="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+            <span className="inline-block px-3 py-1 text-xs font-semibold bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-full border border-purple-200">
               {service.category_name}
             </span>
           )}
         </div>
 
         {/* Description */}
-        <p className="text-gray-600 text-sm mb-3">
+        <p className="text-gray-600 text-sm mb-4 leading-relaxed">
           {truncateText(service.description)}
         </p>
 
         {/* Pricing */}
-        <div className="mb-4">
-          <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500">Base Price:</span>
-            <span className="font-medium text-gray-900">${service.base_price}</span>
+        <div className="mb-4 p-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-100">
+          <div className="flex justify-between items-center text-sm mb-2">
+            <span className="text-gray-600 font-medium">Base Price:</span>
+            <span className="font-bold text-purple-700">${service.base_price}</span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500">Per Hour:</span>
-            <span className="font-medium text-gray-900">${service.price_per_hour}</span>
+            <span className="text-gray-600 font-medium">Per Hour:</span>
+            <span className="font-bold text-purple-700">${service.price_per_hour}</span>
           </div>
         </div>
 
         {/* Capacity */}
-        <div className="mb-4">
+        <div className="mb-4 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border border-pink-100">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-gray-500">Capacity:</span>
-            <span className="font-medium text-gray-900">{service.capacity} people</span>
+            <span className="text-gray-600 font-medium">Capacity:</span>
+            <span className="font-bold text-pink-700">{service.capacity} people</span>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-between items-center pt-3 border-t border-gray-100">
+        <div className="flex justify-between items-center pt-4 border-t border-purple-100">
           <button
             onClick={(e) => {
               e.stopPropagation();
               onEdit(service);
             }}
-            className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-purple-700 bg-purple-50 rounded-lg hover:bg-purple-100 transition-all duration-300 transform hover:scale-105 border border-purple-200"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -127,7 +133,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({
 
           <button
             onClick={handleDelete}
-            className="flex items-center space-x-1 px-3 py-1.5 text-sm font-medium text-red-600 bg-red-50 rounded-md hover:bg-red-100 transition-colors"
+            className="flex items-center space-x-2 px-4 py-2 text-sm font-semibold text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-all duration-300 transform hover:scale-105 border border-red-200"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

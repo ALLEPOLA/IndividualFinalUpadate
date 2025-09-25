@@ -171,133 +171,151 @@ export const Bookings = () => {
 
   if (isLoading) {
     return (
-      <div className="p-6">
+      <div className="p-6 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 min-h-screen">
         <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <span className="ml-3 text-gray-600">Loading bookings...</span>
+          <div className="flex flex-col items-center space-y-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+            <div className="text-center">
+              <span className="text-lg text-gray-600 font-medium">Loading bookings...</span>
+              <p className="text-sm text-gray-500 mt-1">Please wait while we fetch your bookings</p>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Bookings Management</h1>
-        <p className="text-gray-600">
+    <div className="p-6 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 min-h-screen relative">
+      {/* Floating Decorative Elements */}
+      <div className="absolute top-10 left-10 text-2xl animate-bounce opacity-30" style={{ animationDelay: '1s' }}>✨</div>
+      <div className="absolute top-20 right-16 text-xl animate-bounce opacity-30" style={{ animationDelay: '1.5s' }}>🌟</div>
+      <div className="absolute bottom-32 left-16 text-xl animate-bounce opacity-30" style={{ animationDelay: '2s' }}>💫</div>
+      <div className="absolute bottom-20 right-10 text-2xl animate-bounce opacity-30" style={{ animationDelay: '2.5s' }}>⭐</div>
+      
+      <div className="mb-8 relative z-10 animate-fadeIn">
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-700 bg-clip-text text-transparent mb-3">
+          Bookings Management
+        </h1>
+        <p className="text-gray-600 text-lg">
           Manage all your event bookings and track revenue
         </p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-        <div className="bg-white rounded-lg shadow-md p-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-8 relative z-10">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-purple-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.1s' }}>
           <div className="flex items-center">
-            <div className="bg-blue-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">{stats.total}</p>
-              <p className="text-xs text-gray-600">Total</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              <p className="text-sm text-gray-600 font-medium">Total</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-yellow-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.2s' }}>
           <div className="flex items-center">
-            <div className="bg-yellow-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-yellow-100 to-orange-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">{stats.pending}</p>
-              <p className="text-xs text-gray-600">Pending</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.pending}</p>
+              <p className="text-sm text-gray-600 font-medium">Pending</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-green-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.3s' }}>
           <div className="flex items-center">
-            <div className="bg-green-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-green-100 to-emerald-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">{stats.confirmed}</p>
-              <p className="text-xs text-gray-600">Confirmed</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.confirmed}</p>
+              <p className="text-sm text-gray-600 font-medium">Confirmed</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-red-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.4s' }}>
           <div className="flex items-center">
-            <div className="bg-red-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-red-100 to-pink-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">{stats.cancelled}</p>
-              <p className="text-xs text-gray-600">Cancelled</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.cancelled}</p>
+              <p className="text-sm text-gray-600 font-medium">Cancelled</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-purple-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.5s' }}>
           <div className="flex items-center">
-            <div className="bg-purple-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">${stats.totalRevenue.toFixed(0)}</p>
-              <p className="text-xs text-gray-600">Total Revenue</p>
+              <p className="text-2xl font-bold text-purple-700">${stats.totalRevenue.toFixed(0)}</p>
+              <p className="text-sm text-gray-600 font-medium">Total Revenue</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-md p-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-pink-100/50 transform transition-all duration-300 hover:scale-105 hover:shadow-xl animate-fadeIn" style={{ animationDelay: '0.6s' }}>
           <div className="flex items-center">
-            <div className="bg-orange-100 rounded-full p-2 mr-3">
-              <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-full p-3 mr-4">
+              <svg className="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v2a2 2 0 002 2z" />
               </svg>
             </div>
             <div>
-              <p className="text-lg font-bold text-gray-900">${stats.advanceReceived.toFixed(0)}</p>
-              <p className="text-xs text-gray-600">Advance Received</p>
+              <p className="text-2xl font-bold text-pink-700">${stats.advanceReceived.toFixed(0)}</p>
+              <p className="text-sm text-gray-600 font-medium">Advance Received</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Filter Bookings</h2>
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-8 mb-8 border border-purple-100/50 relative z-10 animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+        <h2 className="text-xl font-bold text-purple-700 mb-6 flex items-center">
+          <svg className="w-6 h-6 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.207A1 1 0 013 6.5V4z" />
+          </svg>
+          Filter Bookings
+        </h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-3">Search</label>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300"
               placeholder="Search bookings..."
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-3">Status</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as Event['status'] | 'all')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300"
             >
               <option value="all">All Statuses</option>
               <option value="pending">Pending</option>
@@ -307,11 +325,11 @@ export const Bookings = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Payment Status</label>
+            <label className="block text-sm font-semibold text-gray-700 mb-3">Payment Status</label>
             <select
               value={paymentFilter}
               onChange={(e) => setPaymentFilter(e.target.value as Event['payment_status'] | 'all')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-purple-300"
             >
               <option value="all">All Payments</option>
               <option value="pending">Payment Pending</option>
@@ -327,7 +345,7 @@ export const Bookings = () => {
                 setPaymentFilter('all');
                 setSearchQuery('');
               }}
-              className="w-full px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="w-full px-6 py-3 text-sm font-semibold text-gray-700 bg-gradient-to-r from-gray-100 to-gray-200 border border-gray-300 rounded-lg hover:from-gray-200 hover:to-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105"
             >
               Clear Filters
             </button>
@@ -336,14 +354,19 @@ export const Bookings = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="flex flex-wrap gap-3">
+      <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg p-8 mb-8 border border-purple-100/50 relative z-10 animate-fadeIn" style={{ animationDelay: '0.8s' }}>
+        <h2 className="text-xl font-bold text-purple-700 mb-6 flex items-center">
+          <svg className="w-6 h-6 mr-3 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          Quick Actions
+        </h2>
+        <div className="flex flex-wrap gap-4">
           <button
             onClick={() => setStatusFilter('pending')}
-            className="inline-flex items-center px-4 py-2 border border-yellow-300 shadow-sm text-sm font-medium rounded-md text-yellow-700 bg-yellow-50 hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+            className="inline-flex items-center px-6 py-3 border border-yellow-300 shadow-lg text-sm font-semibold rounded-xl text-yellow-700 bg-gradient-to-r from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300 transform hover:scale-105"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             View Pending ({stats.pending})
@@ -351,9 +374,9 @@ export const Bookings = () => {
           
           <button
             onClick={() => setPaymentFilter('pending')}
-            className="inline-flex items-center px-4 py-2 border border-red-300 shadow-sm text-sm font-medium rounded-md text-red-700 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            className="inline-flex items-center px-6 py-3 border border-red-300 shadow-lg text-sm font-semibold rounded-xl text-red-700 bg-gradient-to-r from-red-50 to-pink-50 hover:from-red-100 hover:to-pink-100 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 transform hover:scale-105"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
             </svg>
             Payment Pending
@@ -361,9 +384,9 @@ export const Bookings = () => {
 
           <button
             onClick={loadVendorEvents}
-            className="inline-flex items-center px-4 py-2 border border-blue-300 shadow-sm text-sm font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-6 py-3 border border-purple-300 shadow-lg text-sm font-semibold rounded-xl text-purple-700 bg-gradient-to-r from-purple-50 to-pink-50 hover:from-purple-100 hover:to-pink-100 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105"
           >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
             Refresh
@@ -373,12 +396,13 @@ export const Bookings = () => {
 
       {/* Events Grid */}
       {filteredEvents.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-md p-12 text-center">
-          <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-16 text-center border border-purple-200/50 relative z-10 animate-fadeIn" style={{ animationDelay: '0.9s' }}>
+          <div className="text-6xl mb-6 animate-bounce">📅</div>
+          <svg className="mx-auto h-16 w-16 text-purple-400 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No bookings found</h3>
-      <p className="text-gray-600">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">No bookings found</h3>
+          <p className="text-gray-600 text-lg leading-relaxed max-w-md mx-auto">
             {events.length === 0 
               ? "You don't have any event bookings yet. Bookings will appear here when clients book your services."
               : "No bookings match your current filters. Try adjusting your search criteria."
@@ -386,16 +410,21 @@ export const Bookings = () => {
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredEvents.map((event) => (
-            <VendorEventCard
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          {filteredEvents.map((event, index) => (
+            <div 
               key={event.id}
-              event={event}
-              onView={() => handleViewDetails(event)}
-              onConfirm={() => handleConfirmEvent(event)}
-              onCancel={() => handleCancelEvent(event)}
-              onAssignTeamMembers={() => handleAssignTeamMembers(event)}
-            />
+              className="animate-fadeIn"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <VendorEventCard
+                event={event}
+                onView={() => handleViewDetails(event)}
+                onConfirm={() => handleConfirmEvent(event)}
+                onCancel={() => handleCancelEvent(event)}
+                onAssignTeamMembers={() => handleAssignTeamMembers(event)}
+              />
+            </div>
           ))}
         </div>
       )}

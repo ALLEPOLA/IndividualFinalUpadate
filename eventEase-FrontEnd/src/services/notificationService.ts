@@ -86,6 +86,13 @@ class NotificationService {
   // Get user's stored notifications
   async getUserNotifications(limit = 50, offset = 0, unreadOnly = false): Promise<StoredNotification[]> {
     try {
+      // Check if user is authenticated before making the request
+      const token = getToken();
+      if (!token) {
+        console.warn('No auth token found, skipping notification fetch');
+        return [];
+      }
+
       const params = new URLSearchParams({
         limit: limit.toString(),
         offset: offset.toString(),
@@ -94,7 +101,12 @@ class NotificationService {
 
       const response = await apiClient.get<NotificationResponse>(`/notifications?${params}`);
       return response.data.data;
-    } catch (error) {
+    } catch (error: any) {
+      // If it's a 401 error, don't log it as an error since it's expected when not authenticated
+      if (error.response?.status === 401) {
+        console.warn('User not authenticated, skipping notification fetch');
+        return [];
+      }
       console.error('Error fetching notifications:', error);
       throw error;
     }
@@ -103,9 +115,21 @@ class NotificationService {
   // Get unread notifications count
   async getUnreadCount(): Promise<number> {
     try {
+      // Check if user is authenticated before making the request
+      const token = getToken();
+      if (!token) {
+        console.warn('No auth token found, skipping unread count fetch');
+        return 0;
+      }
+
       const response = await apiClient.get<UnreadCountResponse>('/notifications/unread-count');
       return response.data.data.unreadCount;
-    } catch (error) {
+    } catch (error: any) {
+      // If it's a 401 error, don't log it as an error since it's expected when not authenticated
+      if (error.response?.status === 401) {
+        console.warn('User not authenticated, skipping unread count fetch');
+        return 0;
+      }
       console.error('Error fetching unread count:', error);
       throw error;
     }
