@@ -84,7 +84,7 @@ export const PaymentSuccess: React.FC = () => {
             Your {paymentType === 'advance' ? 'advance' : 'remaining'} payment has been processed successfully.
           </p>
 
-          {/* Payment Details */}
+          {/* Payment Details
           <div className="bg-gray-50 p-4 rounded-lg mb-6">
             <h3 className="font-semibold text-gray-900 mb-2">Payment Details</h3>
             <div className="text-sm text-gray-600 space-y-1">
@@ -92,7 +92,7 @@ export const PaymentSuccess: React.FC = () => {
               <p><strong>Event ID:</strong> {eventId}</p>
               <p><strong>Payment Type:</strong> {paymentType === 'advance' ? 'Advance Payment' : 'Remaining Payment'}</p>
             </div>
-          </div>
+          </div> */}
 
           {/* Action Button */}
           <button

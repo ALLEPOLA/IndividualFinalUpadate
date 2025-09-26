@@ -63,10 +63,11 @@ const PaymentRedirect: React.FC<{
   if (!paymentDetails) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-500">This event is already fully paid.</p>
+        <div className="text-4xl mb-4">✅</div>
+        <p className="text-gray-600 text-lg font-medium mb-6">This event is already fully paid.</p>
         <button
           onClick={onClose}
-          className="mt-4 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200"
+          className="px-6 py-3 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-purple-700 border border-transparent rounded-xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
           Close
         </button>
@@ -76,28 +77,34 @@ const PaymentRedirect: React.FC<{
 
   return (
     <div className="space-y-6">
-      <div className="bg-blue-50 p-4 rounded-lg">
-        <h3 className="font-semibold text-blue-900 mb-2">Payment Details</h3>
-        <p className="text-blue-800">
-          <strong>Event:</strong> {event.name}
-        </p>
-        <p className="text-blue-800">
-          <strong>Amount:</strong> ${Number(paymentDetails.amount).toFixed(2)}
-        </p>
-        <p className="text-blue-800">
-          <strong>Type:</strong> {paymentDetails.description}
-        </p>
+      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
+        <div className="flex items-center mb-4">
+          <div className="text-2xl mr-3">💳</div>
+          <h3 className="font-bold text-purple-800 text-lg">Payment Details</h3>
+        </div>
+        <div className="space-y-3">
+          <div className="flex justify-between items-center py-2 border-b border-purple-200">
+            <span className="font-medium text-purple-700">Event:</span>
+            <span className="text-purple-900 font-semibold">{event.name}</span>
+          </div>
+          <div className="flex justify-between items-center py-2 border-b border-purple-200">
+            <span className="font-medium text-purple-700">Amount:</span>
+            <span className="text-purple-900 font-bold text-lg">${Number(paymentDetails.amount).toFixed(2)}</span>
+          </div>
+          <div className="flex justify-between items-center py-2">
+            <span className="font-medium text-purple-700">Type:</span>
+            <span className="text-purple-900 font-semibold">{paymentDetails.description}</span>
+          </div>
+        </div>
       </div>
 
-      <div className="bg-yellow-50 p-4 rounded-lg">
+      <div className="bg-gradient-to-br from-amber-50 to-yellow-50 p-4 rounded-xl border border-amber-200">
         <div className="flex">
           <div className="flex-shrink-0">
-            <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
+            <div className="text-2xl">⚠️</div>
           </div>
           <div className="ml-3">
-            <p className="text-sm text-yellow-700">
+            <p className="text-sm text-amber-800 font-medium">
               You will be redirected to Stripe's secure payment page to complete your payment.
             </p>
           </div>
@@ -105,8 +112,8 @@ const PaymentRedirect: React.FC<{
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
-          <p className="text-sm">{error}</p>
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl animate-pulse">
+          <p className="text-sm font-medium">{error}</p>
         </div>
       )}
 
@@ -115,16 +122,23 @@ const PaymentRedirect: React.FC<{
           type="button"
           onClick={onClose}
           disabled={isLoading}
-          className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50"
+          className="px-6 py-3 text-sm font-medium text-gray-700 bg-gray-100 border border-gray-300 rounded-xl hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:opacity-50 transition-all duration-300 hover:scale-105"
         >
           Cancel
         </button>
         <button
           onClick={handlePayNow}
           disabled={isLoading}
-          className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+          className="px-6 py-3 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-purple-700 border border-transparent rounded-xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 disabled:opacity-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
-          {isLoading ? 'Redirecting...' : `Pay $${Number(paymentDetails.amount).toFixed(2)}`}
+          {isLoading ? (
+            <div className="flex items-center">
+              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+              Redirecting...
+            </div>
+          ) : (
+            `Pay $${Number(paymentDetails.amount).toFixed(2)}`
+          )}
         </button>
       </div>
     </div>
@@ -141,13 +155,16 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   if (!isOpen || !event) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
-        <div className="flex items-center justify-between p-6 border-b">
-          <h2 className="text-xl font-semibold">Payment</h2>
+    <div className="fixed inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 bg-opacity-95 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md border border-gray-100 backdrop-blur-sm">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <div className="flex items-center">
+            <div className="text-2xl mr-3">💳</div>
+            <h2 className="text-2xl font-bold text-purple-600">Payment</h2>
+          </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
+            className="text-gray-400 hover:text-purple-600 transition-colors duration-300 p-2 rounded-full hover:bg-purple-50"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

@@ -95,8 +95,8 @@ class NotificationService {
   async notifyPaymentReceived(paymentData, userId) {
     const notification = {
       type: 'PAYMENT_RECEIVED',
-      title: 'Payment Received',
-      message: `Payment of $${paymentData.amount} has been received`,
+      title: 'Payment Paid',
+      message: `Payment of $${paymentData.amount} has been paid`,
       data: paymentData,
       timestamp: new Date().toISOString()
     };

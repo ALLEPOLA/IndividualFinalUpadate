@@ -21,7 +21,8 @@ export const EventFormModal = ({ event, isOpen, onClose, onSuccess }: EventFormM
     date: '',
     start_time: '',
     end_time: '',
-    special_requirements: ''
+    special_requirements: '',
+    advance_amount: ''
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -35,6 +36,7 @@ export const EventFormModal = ({ event, isOpen, onClose, onSuccess }: EventFormM
         date: event.date,
         start_time: event.start_time,
         end_time: event.end_time,
+        advance_amount: event.advance_amount !== undefined && event.advance_amount !== null ? String(event.advance_amount) : '',
         special_requirements: event.special_requirements || ''
       });
       setSelectedServices(event.services);
@@ -151,7 +153,13 @@ export const EventFormModal = ({ event, isOpen, onClose, onSuccess }: EventFormM
         services: selectedServices
       };
 
-      const response = await eventService.updateEvent(event.id!, updateData);
+      // Fix: Convert advance_amount to number before sending to updateEvent
+      const updateDataFixed = {
+        ...updateData,
+        advance_amount: Number(updateData.advance_amount)
+      };
+
+      const response = await eventService.updateEvent(event.id!, updateDataFixed);
       if (response.success) {
         onSuccess();
         onClose();
@@ -269,6 +277,18 @@ export const EventFormModal = ({ event, isOpen, onClose, onSuccess }: EventFormM
                   placeholder="Describe your event"
                 />
                 {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Advance Amount *
+                </label>
+                <input
+                  type="number"
+                  value={formData.advance_amount}
+                  onChange={(e) => handleInputChange('advance_amount', e.target.value)}
+                  disabled={isConfirmed}
+                />
               </div>
 
               <div>
