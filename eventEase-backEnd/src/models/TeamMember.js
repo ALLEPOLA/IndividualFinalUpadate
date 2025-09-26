@@ -10,8 +10,9 @@ class TeamMember {
     this.role = teamMemberData.role;
     this.hourly_rate = teamMemberData.hourly_rate;
     this.is_active = teamMemberData.is_active;
-    this.created_at = teamMemberData.created_at;
-    this.updated_at = teamMemberData.updated_at;
+    this.created_at = teamMemberData.createdAt;
+    this.updated_at = teamMemberData.updatedAt;
+    this.vendor_business_name = teamMemberData.vendor_business_name;
   }
 
   // Create a new team member
@@ -26,8 +27,8 @@ class TeamMember {
     } = teamMemberData;
 
     const query = `
-      INSERT INTO team_member 
-      (vendor_id, name, email, phone, role, hourly_rate, is_active, created_at, updated_at)
+      INSERT INTO team_members 
+      (vendor_id, name, email, phone, role, hourly_rate, is_active, createdAt, updatedAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
     `;
 
@@ -52,7 +53,7 @@ class TeamMember {
   static async findById(id) {
     const query = `
       SELECT tm.*, v.businessName as vendor_business_name 
-      FROM team_member tm
+      FROM team_members tm
       LEFT JOIN vendors v ON tm.vendor_id = v.id
       WHERE tm.id = ?
     `;
@@ -69,10 +70,10 @@ class TeamMember {
   static async findByVendor(vendorId) {
     const query = `
       SELECT tm.*, v.businessName as vendor_business_name 
-      FROM team_member tm
+      FROM team_members tm
       LEFT JOIN vendors v ON tm.vendor_id = v.id
       WHERE tm.vendor_id = ?
-      ORDER BY tm.is_active DESC, tm.created_at DESC
+      ORDER BY tm.is_active DESC, tm.createdAt DESC
     `;
 
     try {
@@ -103,8 +104,8 @@ class TeamMember {
       const offset = (pageInt - 1) * limitInt;
       
       // Validate and sanitize sort parameters
-      const allowedSortFields = ['created_at', 'updated_at', 'name', 'email', 'role', 'hourly_rate'];
-      const safeSortBy = allowedSortFields.includes(sort_by) ? sort_by : 'created_at';
+      const allowedSortFields = ['createdAt', 'updatedAt', 'name', 'email', 'role', 'hourly_rate'];
+      const safeSortBy = allowedSortFields.includes(sort_by) ? sort_by : 'createdAt';
       const safeSortOrder = ['ASC', 'DESC'].includes(sort_order.toUpperCase()) ? sort_order.toUpperCase() : 'DESC';
       
       let whereConditions = [];
@@ -134,7 +135,7 @@ class TeamMember {
       // Count query
       const countQuery = `
         SELECT COUNT(*) as total
-        FROM team_member tm
+        FROM team_members tm
         LEFT JOIN vendors v ON tm.vendor_id = v.id
         ${whereClause}
       `;
@@ -142,15 +143,15 @@ class TeamMember {
       // Data query - using safe parameters
       const dataQuery = `
         SELECT tm.*, v.businessName as vendor_business_name 
-        FROM team_member tm
+        FROM team_members tm
         LEFT JOIN vendors v ON tm.vendor_id = v.id
         ${whereClause}
         ORDER BY tm.${safeSortBy} ${safeSortOrder}
-        LIMIT ? OFFSET ?
+        LIMIT ${limitInt} OFFSET ${offset}
       `;
 
       const [countResult] = await pool.execute(countQuery, queryParams);
-      const [dataResult] = await pool.execute(dataQuery, [...queryParams, limitInt, offset]);
+      const [dataResult] = await pool.execute(dataQuery, queryParams);
 
       return {
         data: dataResult.map(row => new TeamMember(row)),
@@ -189,8 +190,8 @@ class TeamMember {
       .join(', ');
 
     const query = `
-      UPDATE team_member 
-      SET ${fields}, updated_at = NOW()
+      UPDATE team_members 
+      SET ${fields}, updatedAt = NOW()
       WHERE id = ?
     `;
 
@@ -212,7 +213,7 @@ class TeamMember {
 
   // Delete team member
   static async delete(id) {
-    const query = 'DELETE FROM team_member WHERE id = ?';
+    const query = 'DELETE FROM team_members WHERE id = ?';
 
     try {
       const [result] = await pool.execute(query, [id]);
@@ -229,7 +230,7 @@ class TeamMember {
 
   // Check if email exists for vendor
   static async emailExistsForVendor(email, vendorId, excludeId = null) {
-    let query = 'SELECT id FROM team_member WHERE email = ? AND vendor_id = ? AND is_active = true';
+    let query = 'SELECT id FROM team_members WHERE email = ? AND vendor_id = ? AND is_active = true';
     let params = [email, vendorId];
 
     if (excludeId) {

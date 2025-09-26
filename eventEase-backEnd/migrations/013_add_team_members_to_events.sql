@@ -5,3 +5,6 @@
 ALTER TABLE events 
 ADD COLUMN team_members JSON DEFAULT NULL;
 
+
+
+

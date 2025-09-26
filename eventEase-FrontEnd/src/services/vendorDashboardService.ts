@@ -159,9 +159,13 @@ export interface TeamUtilization {
   memberId: number;
   memberName: string;
   role: string;
+  email: string;
   hourlyRate: number;
   isActive: boolean;
   eventsAssigned: number;
+  totalRevenue: number;
+  utilizationPercentage: number;
+  averageEventValue: number;
 }
 
 export interface BusinessGrowth {
@@ -173,9 +177,24 @@ export interface BusinessGrowth {
   eventGrowth: number;
 }
 
+export interface TeamPerformanceSummary {
+  totalTeamMembers: number;
+  activeTeamMembers: number;
+  totalEventsWithTeam: number;
+  averageTeamSizePerEvent: number;
+  topPerformingMember: {
+    name: string;
+    role: string;
+    revenue: number;
+    events: number;
+  } | null;
+  totalTeamCost: number;
+}
+
 export interface VendorBusinessInsights {
   servicePerformance: ServicePerformance[];
   teamUtilization: TeamUtilization[];
+  teamPerformanceSummary: TeamPerformanceSummary;
   businessGrowth: BusinessGrowth;
 }
 

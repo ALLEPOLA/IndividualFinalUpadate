@@ -98,7 +98,7 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <nav className="bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 backdrop-blur-sm shadow-lg border-b-2 border-purple-400 sticky top-0 z-50 relative overflow-hidden">
+    <nav className="bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 backdrop-blur-sm shadow-lg border-b-2 border-purple-400 relative overflow-hidden">
       {/* Very Colorful Floating Elements */}
       <div className="absolute top-2 left-12 text-xl animate-bounce opacity-70" style={{ animationDelay: '1s' }}>✨</div>
       <div className="absolute top-3 right-20 text-xl animate-bounce opacity-70" style={{ animationDelay: '2s' }}>🌟</div>
