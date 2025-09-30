@@ -119,7 +119,7 @@ function Signup() {
               to="/login"
               className="font-medium text-purple-600 hover:text-purple-500 transition-colors duration-300"
             >
-              sign in to your existing account
+              signs in to your existing account
             </Link>
           </p>
         </div>
