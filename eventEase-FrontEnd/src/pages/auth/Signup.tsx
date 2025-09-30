@@ -264,6 +264,29 @@ function Signup() {
                   <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
                 )}
               </div>
+              {/*phone*/}
+              <div>
+                <label htmlFor="Phone1" className='block text-sm font-medium text-gray-700'>
+                  Phone Number 1 *
+                </label>
+                <input
+                  {...register('phone', {
+                    required: 'Phone number is required',
+                    pattern: {
+                      value: /^[\+]?[1-9][\d]{0,15}$/,
+                      message: 'Invalid phone number format',
+                    },
+                  })}
+                  type="tel"
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
+                    errors.phone ? 'border-red-300' : 'border-gray-300'
+                  }`}
+                  placeholder="Enter your phone number"
+                />
+                {errors.phone && (
+                  <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                )}
+              </div>
 
               {/* Email */}
               <div>

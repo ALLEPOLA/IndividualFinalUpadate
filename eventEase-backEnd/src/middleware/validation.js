@@ -28,7 +28,7 @@ const validateSignup = (req, res, next) => {
     errors.push('Invalid email format');
   }
 
-  // Phone format validation (basic)
+  // Phone format validation 
   if (phone && !/^[\+]?[1-9][\d]{0,15}$/.test(phone.replace(/[\s\-\(\)]/g, ''))) {
     errors.push('Invalid phone number format');
   }
