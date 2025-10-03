@@ -225,7 +225,7 @@ const Header: React.FC<HeaderProps> = ({
                   </button>
                   <button 
                     onClick={handleSignUpClick}
-                    className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 border border-purple-500/30 hover:scale-105"
+                    className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 border border-purple-500/30 hover:scale-105"
                   >
                     <span className="flex items-center space-x-2">
                       <span>🚀</span>

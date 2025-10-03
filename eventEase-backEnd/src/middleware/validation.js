@@ -7,6 +7,8 @@ const validateSignup = (req, res, next) => {
   if (!firstName || firstName.trim().length === 0) {
     errors.push('First name is required');
   }
+  // if (!middleName || middleName.trim().length === 0) {
+  //   errors.push('Middle name is required');}
   if (!lastName || lastName.trim().length === 0) {
     errors.push('Last name is required');
   }
@@ -18,6 +20,7 @@ const validateSignup = (req, res, next) => {
   }
   if (!email || email.trim().length === 0) {
     errors.push('Email is required');
+  
   }
   if (!password || password.length < 6) {
     errors.push('Password is required and must be at least 6 characters');

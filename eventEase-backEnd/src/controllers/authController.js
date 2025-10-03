@@ -11,7 +11,9 @@ const generateToken = (user) => {
     {
       id: user.id,
       firstName: user.firstName,
+      middleName: user.middleName,
       lastName: user.lastName,
+      address: user.address,
       phone: user.phone,
       role: user.role,
       email: user.email
@@ -27,14 +29,16 @@ const signUp = async (req, res) => {
     const { 
       firstName, 
       lastName, 
+      middleName,
       phone, 
       role, 
       email, 
       password,
+      address,
       // Vendor-specific fields
       businessName,
       description,
-      address,
+     
       city,
       province,
       postalCode,
@@ -60,9 +64,11 @@ const signUp = async (req, res) => {
     // Create user
     const userData = {
       firstName,
+      middleName,
       lastName,
       phone,
       role,
+      address,
       email,
       password: hashedPassword,
       emailVerified: false

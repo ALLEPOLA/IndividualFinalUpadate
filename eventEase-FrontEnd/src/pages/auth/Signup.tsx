@@ -8,6 +8,7 @@ interface SignupFormData {
   // User fields
   firstName: string;
   lastName: string;
+   middleName?: string; 
   phone: string;
   role: 'user' | 'vendor';
   email: string;
@@ -189,6 +190,9 @@ function Signup() {
             </div>
           </div>
 
+ {/*user information  ofrm  collecting*/}
+
+
           {/* User Information */}
           <div className="bg-white/80 backdrop-blur-sm p-6 rounded-3xl shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
             <h3 className="text-lg font-medium text-purple-600 mb-4">👤 Personal Information</h3>
@@ -216,7 +220,27 @@ function Signup() {
                   <p className="mt-2 text-sm text-red-600 animate-pulse">{errors.firstName.message}</p>
                 )}
               </div>
-
+{/* Middle Name (optional) */}
+              <div>
+                <label htmlFor="middleName" className="block text-sm font-medium text-gray-700">
+                  Middle Name
+                </label>
+                <input
+                  {...register('middleName', {
+                    required: false,
+                    minLength: { value: 1, message: 'Middle name must be at least 1 character' }
+                  })}
+                  type="text"
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
+                    errors.middleName ? 'border-red-300' : 'border-gray-300'
+                  }`}
+                  placeholder="Middle name (optional)"
+                />
+                {errors.middleName && (
+                  <p className="mt-1 text-sm text-red-600">{errors.middleName.message}</p>
+                )}
+              </div>
+              
               {/* Last Name */}
               <div>
                 <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
@@ -231,7 +255,7 @@ function Signup() {
                     },
                   })}
                   type="text"
-                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
+                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-red-500 transition-all duration-300 group-hover:shadow-md ${
                     errors.lastName ? 'border-red-300' : 'border-gray-300'
                   }`}
                   placeholder="Enter your last name"
@@ -264,31 +288,8 @@ function Signup() {
                   <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
                 )}
               </div>
-              {/*phone*/}
-              <div>
-                <label htmlFor="Phone1" className='block text-sm font-medium text-gray-700'>
-                  Phone Number 1 *
-                </label>
-                <input
-                  {...register('phone', {
-                    required: 'Phone number is required',
-                    pattern: {
-                      value: /^[\+]?[1-9][\d]{0,15}$/,
-                      message: 'Invalid phone number format',
-                    },
-                  })}
-                  type="tel"
-                  className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
-                    errors.phone ? 'border-red-300' : 'border-gray-300'
-                  }`}
-                  placeholder="Enter your phone number"
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-                )}
-              </div>
-
-              {/* Email */}
+            
+{/* Email */}
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email Address *
@@ -313,6 +314,11 @@ function Signup() {
               </div>
             </div>
           </div>
+
+
+
+
+          {/*vendor form detail  collecting*/}
 
           {/* Vendor Information - Only show if vendor is selected */}
           {selectedRole === 'vendor' && (
@@ -513,26 +519,7 @@ function Signup() {
                       <p className="mt-1 text-sm text-red-600">{errors.businessRegistrationNumber.message}</p>
                     )}
                   </div>
-
-                  {/* Business License Number */}
-                  <div>
-                    <label htmlFor="businessLicenseNumber" className="block text-sm font-medium text-gray-700">
-                      Business License Number *
-                    </label>
-                    <input
-                      {...register('businessLicenseNumber', {
-                        required: selectedRole === 'vendor' ? 'Business license number is required' : false,
-                      })}
-                      type="text"
-                      className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
-                        errors.businessLicenseNumber ? 'border-red-300' : 'border-gray-300'
-                      }`}
-                      placeholder="Enter license number"
-                    />
-                    {errors.businessLicenseNumber && (
-                      <p className="mt-1 text-sm text-red-600">{errors.businessLicenseNumber.message}</p>
-                    )}
-                  </div>
+                  
                 </div>
               </div>
             </div>

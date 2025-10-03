@@ -130,7 +130,7 @@ function EmailVerification() {
               {success}
             </div>
           )}
-
+{/* otp digit */}
           <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4">
             <div>
               <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
