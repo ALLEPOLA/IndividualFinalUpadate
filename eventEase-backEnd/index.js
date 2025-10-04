@@ -77,6 +77,35 @@ io.on('connection', (socket) => {
     console.log(`User ${socket.user.id} joined room: ${room}`);
   });
   
+  // Chat-specific events
+  socket.on('join_chat', (chatId) => {
+    socket.join(`chat_${chatId}`);
+    console.log(`User ${socket.user.id} joined chat: ${chatId}`);
+  });
+  
+  socket.on('leave_chat', (chatId) => {
+    socket.leave(`chat_${chatId}`);
+    console.log(`User ${socket.user.id} left chat: ${chatId}`);
+  });
+  
+  socket.on('typing_start', (data) => {
+    const { chatId } = data;
+    socket.to(`chat_${chatId}`).emit('user_typing', {
+      userId: socket.user.id,
+      userType: socket.user.role,
+      isTyping: true
+    });
+  });
+  
+  socket.on('typing_stop', (data) => {
+    const { chatId } = data;
+    socket.to(`chat_${chatId}`).emit('user_typing', {
+      userId: socket.user.id,
+      userType: socket.user.role,
+      isTyping: false
+    });
+  });
+  
   socket.on('disconnect', () => {
     console.log('User disconnected:', socket.id);
   });

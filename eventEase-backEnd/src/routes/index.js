@@ -11,6 +11,8 @@ const dashboardRoutes = require('./dashboard');
 const vendorDashboardRoutes = require('./vendorDashboard');
 const eventTeamMemberRoutes = require('./eventTeamMembers');
 const notificationRoutes = require('./notifications');
+const chatRoutes = require('./chats');
+const moderatorRoutes = require('./moderators');
 
 // Mount routes
 router.use('/auth', authRoutes);
@@ -24,5 +26,7 @@ router.use('/dashboard', dashboardRoutes);
 router.use('/dashboard', vendorDashboardRoutes);
 router.use('/event-team-members', eventTeamMemberRoutes);
 router.use('/notifications', notificationRoutes);
+router.use('/chats', chatRoutes);
+router.use('/moderators', moderatorRoutes);
 
 module.exports = router;
