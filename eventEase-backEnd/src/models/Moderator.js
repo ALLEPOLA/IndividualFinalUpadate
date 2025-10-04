@@ -158,7 +158,7 @@ class Moderator {
   static async getAllActive() {
     try {
       const [rows] = await pool.execute(
-        'SELECT id, firstName, middleName, lastName, email, phone, address, permissions, created_at FROM moderators WHERE isActive = TRUE ORDER BY created_at DESC'
+        'SELECT id, firstName, middleName, lastName, email, phone, address, permissions, isActive, created_at as createdAt, updated_at as updatedAt FROM moderators WHERE isActive = TRUE ORDER BY created_at DESC'
       );
       return rows.map(row => new Moderator(row));
     } catch (error) {

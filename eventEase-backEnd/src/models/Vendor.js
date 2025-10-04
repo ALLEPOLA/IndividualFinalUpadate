@@ -16,6 +16,14 @@ class Vendor {
     this.businessLicenseNumber = vendorData.businessLicenseNumber;
     this.createdAt = vendorData.createdAt;
     this.updatedAt = vendorData.updatedAt;
+    
+    // User information (if available from JOIN query)
+    this.user = vendorData.firstName ? {
+      firstName: vendorData.firstName,
+      lastName: vendorData.lastName,
+      email: vendorData.email,
+      phone: vendorData.phone
+    } : null;
   }
 
   // Create vendor by user ID
@@ -111,10 +119,17 @@ class Vendor {
   // Find vendor by ID
   static async findById(id) {
     try {
-      const [rows] = await pool.execute(
-        'SELECT * FROM vendors WHERE id = ?',
-        [id]
-      );
+      const [rows] = await pool.execute(`
+        SELECT 
+          v.*,
+          u.firstName,
+          u.lastName,
+          u.email,
+          u.phone
+        FROM vendors v
+        LEFT JOIN users u ON v.userId = u.id
+        WHERE v.id = ?
+      `, [id]);
       return rows.length > 0 ? new Vendor(rows[0]) : null;
     } catch (error) {
       console.error('Error finding vendor by ID:', error.message);
@@ -162,9 +177,17 @@ class Vendor {
   // Find all vendors
   static async findAll() {
     try {
-      const [rows] = await pool.execute(
-        'SELECT * FROM vendors ORDER BY businessName ASC'
-      );
+      const [rows] = await pool.execute(`
+        SELECT 
+          v.*,
+          u.firstName,
+          u.lastName,
+          u.email,
+          u.phone
+        FROM vendors v
+        LEFT JOIN users u ON v.userId = u.id
+        ORDER BY v.businessName ASC
+      `);
       return rows.map(row => new Vendor(row));
     } catch (error) {
       console.error('Error finding all vendors:', error.message);

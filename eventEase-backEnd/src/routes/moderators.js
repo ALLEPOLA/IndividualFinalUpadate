@@ -9,10 +9,10 @@ const {
   deactivateModerator
 } = require('../controllers/moderatorController');
 const { authenticateToken } = require('../middleware/auth');
-const { validateSignup, validateLogin } = require('../middleware/validation');
+const { validateModeratorCreate, validateLogin } = require('../middleware/validation');
 
 // Public routes
-router.post('/create', validateSignup, createModerator);
+router.post('/create', validateModeratorCreate, createModerator);
 router.post('/login', validateLogin, loginModerator);
 
 // Protected routes

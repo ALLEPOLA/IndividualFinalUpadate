@@ -13,9 +13,11 @@ const eventTeamMemberRoutes = require('./eventTeamMembers');
 const notificationRoutes = require('./notifications');
 const chatRoutes = require('./chats');
 const moderatorRoutes = require('./moderators');
+const userRoutes = require('./users');
 
 // Mount routes
 router.use('/auth', authRoutes);
+router.use('/users', userRoutes);
 router.use('/vendors', vendorRoutes);
 router.use('/vendor-services', vendorServiceRoutes);
 router.use('/service-categories', serviceCategoryRoutes);

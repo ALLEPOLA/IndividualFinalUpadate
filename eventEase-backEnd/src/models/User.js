@@ -4,9 +4,9 @@ class User {
   constructor(userData) {
     this.id = userData.id;
     this.firstName = userData.firstName;
-    this.middlename = userData.middleName;
+    this.middleName = userData.middleName || null;
     this.lastName = userData.lastName;
-    this.adress = userData.address;
+    this.address = userData.address || null;
     this.phone = userData.phone;
     this.role = userData.role;
     this.email = userData.email;
@@ -14,6 +14,8 @@ class User {
     this.emailVerified = userData.emailVerified || userData.email_verified;
     this.emailOtp = userData.emailOtp || userData.email_otp;
     this.emailOtpExpires = userData.emailOtpExpires || userData.email_otp_expires;
+    this.createdAt = userData.createdAt;
+    this.updatedAt = userData.updatedAt;
   }
 
 
@@ -144,6 +146,64 @@ class User {
       console.error('Error setting email OTP:', error.message);
       throw error;
     }
+  }
+
+  // Get all users (for admin purposes)
+  static async findAll() {
+    try {
+      const [rows] = await pool.execute(
+        'SELECT id, firstName, lastName, email, phone, role, email_verified as emailVerified, createdAt, updatedAt FROM users WHERE role = "user" ORDER BY createdAt DESC'
+      );
+      return rows.map(row => new User(row));
+    } catch (error) {
+      console.error('Error finding all users:', error.message);
+      throw error;
+    }
+  }
+
+  // Delete user by ID
+  static async deleteById(id) {
+    try {
+      const [result] = await pool.execute(
+        'DELETE FROM users WHERE id = ?',
+        [id]
+      );
+      return result.affectedRows > 0;
+    } catch (error) {
+      console.error('Error deleting user:', error.message);
+      throw error;
+    }
+  }
+
+  // Update user role
+  static async updateRole(id, role) {
+    try {
+      const [result] = await pool.execute(
+        'UPDATE users SET role = ?, updatedAt = CURRENT_TIMESTAMP WHERE id = ?',
+        [role, id]
+      );
+      return result.affectedRows > 0;
+    } catch (error) {
+      console.error('Error updating user role:', error.message);
+      throw error;
+    }
+  }
+
+  // Convert to JSON (exclude sensitive data)
+  toJSON() {
+    return {
+      id: this.id,
+      firstName: this.firstName,
+      middleName: this.middleName,
+      lastName: this.lastName,
+      address: this.address,
+      phone: this.phone,
+      role: this.role,
+      email: this.email,
+      emailVerified: this.emailVerified,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt
+    };
   }
 }
 

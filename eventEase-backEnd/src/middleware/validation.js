@@ -849,9 +849,81 @@ const validateVendorUpdate = (req, res, next) => {
 // Backward compatibility - default to create validation
 const validateVendor = validateVendorCreate;
 
+// Validation middleware for moderator creation
+const validateModeratorCreate = (req, res, next) => {
+  const { firstName, lastName, middleName, address, phone, email, password, permissions } = req.body;
+  const errors = [];
+
+  // Check required fields
+  if (!firstName || firstName.trim().length === 0) {
+    errors.push('First name is required');
+  }
+  if (!lastName || lastName.trim().length === 0) {
+    errors.push('Last name is required');
+  }
+  if (!phone || phone.trim().length === 0) {
+    errors.push('Phone number is required');
+  }
+  if (!email || email.trim().length === 0) {
+    errors.push('Email is required');
+  }
+  if (!password || password.length < 6) {
+    errors.push('Password is required and must be at least 6 characters');
+  }
+
+  // Email format validation
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errors.push('Invalid email format');
+  }
+
+  // Phone format validation 
+  if (phone && !/^[\+]?[1-9][\d]{0,15}$/.test(phone.replace(/[\s\-\(\)]/g, ''))) {
+    errors.push('Invalid phone number format');
+  }
+
+  // Optional fields validation
+  if (middleName !== undefined && middleName && middleName.trim().length > 100) {
+    errors.push('Middle name must not exceed 100 characters');
+  }
+
+  if (address !== undefined && address && address.trim().length > 500) {
+    errors.push('Address must not exceed 500 characters');
+  }
+
+  // Permissions validation (optional, defaults will be set in controller)
+  if (permissions !== undefined && permissions !== null) {
+    if (typeof permissions !== 'object') {
+      errors.push('Permissions must be an object');
+    } else {
+      const validPermissions = ['canManageUsers', 'canManageVendors', 'canManageEvents', 'canManagePayments', 'canViewReports'];
+      const permissionKeys = Object.keys(permissions);
+      
+      for (const key of permissionKeys) {
+        if (!validPermissions.includes(key)) {
+          errors.push(`Invalid permission: ${key}`);
+        }
+        if (typeof permissions[key] !== 'boolean') {
+          errors.push(`Permission ${key} must be a boolean value`);
+        }
+      }
+    }
+  }
+
+  if (errors.length > 0) {
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors
+    });
+  }
+
+  next();
+};
+
 module.exports = {
   validateSignup,
   validateLogin,
+  validateModeratorCreate,
   validateVendorService,
   validateTeamMember,
   validateTeamMemberCreate,
