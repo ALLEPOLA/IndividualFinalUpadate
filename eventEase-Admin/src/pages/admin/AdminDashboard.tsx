@@ -9,6 +9,9 @@ import VendorTable from '../../components/VendorTable';
 import VendorDetailsModal from '../../components/VendorDetailsModal';
 import UserTable from '../../components/UserTable';
 import UserDetailsModal from '../../components/UserDetailsModal';
+import EventTable from '../../components/EventTable';
+import EventDetailsModal from '../../components/EventDetailsModal';
+import PaymentTable from '../../components/PaymentTable';
 
 interface AdminDashboardProps {}
 
@@ -33,6 +36,16 @@ function AdminDashboard({}: AdminDashboardProps) {
   const [selectedUser, setSelectedUser] = useState<any | null>(null);
   const [isUserDetailsOpen, setIsUserDetailsOpen] = useState(false);
 
+  // Event management state
+  const [events, setEvents] = useState<any[]>([]);
+  const [isLoadingEvents, setIsLoadingEvents] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
+  const [isEventDetailsOpen, setIsEventDetailsOpen] = useState(false);
+
+  // Payment management state
+  const [payments, setPayments] = useState<any[]>([]);
+  const [isLoadingPayments, setIsLoadingPayments] = useState(false);
+
   const handleLogout = () => {
     logout();
     navigate('/admin/login');
@@ -56,6 +69,20 @@ function AdminDashboard({}: AdminDashboardProps) {
   useEffect(() => {
     if (activeSection === 'users' && moderator) {
       loadUsers();
+    }
+  }, [activeSection, moderator]);
+
+  // Load events when event management section is active and user is authenticated
+  useEffect(() => {
+    if (activeSection === 'events' && moderator) {
+      loadEvents();
+    }
+  }, [activeSection, moderator]);
+
+  // Load payments when financial management section is active and user is authenticated
+  useEffect(() => {
+    if (activeSection === 'financial' && moderator) {
+      loadPayments();
     }
   }, [activeSection, moderator]);
 
@@ -166,6 +193,56 @@ function AdminDashboard({}: AdminDashboardProps) {
         console.error('Failed to delete user:', error);
         alert('Failed to delete user');
       }
+    }
+  };
+
+  // Event management functions
+  const loadEvents = async () => {
+    try {
+      setIsLoadingEvents(true);
+      const response = await adminService.getAllEvents();
+      setEvents(response.data || []);
+    } catch (error) {
+      console.error('Failed to load events:', error);
+    } finally {
+      setIsLoadingEvents(false);
+    }
+  };
+
+  const handleViewEvent = async (event: any) => {
+    try {
+      const response = await adminService.getEventById(event.id);
+      setSelectedEvent(response.data);
+      setIsEventDetailsOpen(true);
+    } catch (error) {
+      console.error('Failed to load event details:', error);
+      alert('Failed to load event details');
+    }
+  };
+
+  const handleDeleteEvent = async (event: any) => {
+    if (window.confirm(`Are you sure you want to delete "${event.name}"? This action cannot be undone.`)) {
+      try {
+        await adminService.deleteEvent(event.id);
+        await loadEvents(); // Refresh the list
+        alert('Event deleted successfully');
+      } catch (error) {
+        console.error('Failed to delete event:', error);
+        alert('Failed to delete event');
+      }
+    }
+  };
+
+  // Payment management functions
+  const loadPayments = async () => {
+    try {
+      setIsLoadingPayments(true);
+      const response = await adminService.getPayments();
+      setPayments(response.data || []);
+    } catch (error) {
+      console.error('Failed to load payments:', error);
+    } finally {
+      setIsLoadingPayments(false);
     }
   };
 
@@ -337,18 +414,65 @@ function AdminDashboard({}: AdminDashboardProps) {
       case 'events':
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900">Event Management</h2>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <p className="text-gray-600">Event management content will be implemented here.</p>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">Event Management</h2>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  {events.length} event{events.length !== 1 ? 's' : ''} found
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6">
+                {!moderator ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <p>Please log in to access event management.</p>
+                  </div>
+                ) : (
+                  <EventTable
+                    events={events}
+                    onView={handleViewEvent}
+                    onDelete={handleDeleteEvent}
+                    canManageEvents={moderator.permissions?.canManageEvents || false}
+                    isLoading={isLoadingEvents}
+                  />
+                )}
+              </div>
             </div>
           </div>
         );
       case 'financial':
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900">Financial Management</h2>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <p className="text-gray-600">Financial management content will be implemented here.</p>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">Financial Management</h2>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  {payments.length} payment{payments.length !== 1 ? 's' : ''} found
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow">
+              <div className="p-6">
+                {!moderator ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                    </svg>
+                    <p>Please log in to access financial management.</p>
+                  </div>
+                ) : (
+                  <PaymentTable
+                    payments={payments}
+                    isLoading={isLoadingPayments}
+                  />
+                )}
+              </div>
             </div>
           </div>
         );
@@ -494,6 +618,16 @@ function AdminDashboard({}: AdminDashboardProps) {
         onClose={() => {
           setIsUserDetailsOpen(false);
           setSelectedUser(null);
+        }}
+      />
+
+      {/* Event Details Modal */}
+      <EventDetailsModal
+        event={selectedEvent}
+        isOpen={isEventDetailsOpen}
+        onClose={() => {
+          setIsEventDetailsOpen(false);
+          setSelectedEvent(null);
         }}
       />
     </div>

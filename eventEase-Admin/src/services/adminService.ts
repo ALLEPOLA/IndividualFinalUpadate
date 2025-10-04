@@ -79,60 +79,6 @@ class AdminService {
     return response.json();
   }
 
-  // Event Management
-  async getAllEvents() {
-    const response = await fetch(`${API_BASE_URL}/events`, {
-      headers: this.getAuthHeaders(),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to get events');
-    }
-
-    return response.json();
-  }
-
-  async getEventById(id: number) {
-    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
-      headers: this.getAuthHeaders(),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to get event');
-    }
-
-    return response.json();
-  }
-
-  // Financial Management
-  async getPayments() {
-    const response = await fetch(`${API_BASE_URL}/payments`, {
-      headers: this.getAuthHeaders(),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to get payments');
-    }
-
-    return response.json();
-  }
-
-  async getFinancialReports() {
-    const response = await fetch(`${API_BASE_URL}/admin/financial-reports`, {
-      headers: this.getAuthHeaders(),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to get financial reports');
-    }
-
-    return response.json();
-  }
-
   // Moderator Management
   async getAllModerators() {
     const response = await fetch(`${API_BASE_URL}/moderators/all`, {
@@ -272,6 +218,170 @@ class AdminService {
     if (!response.ok) {
       const errorData = await response.json();
       throw new Error(errorData.message || 'Failed to update user role');
+    }
+
+    return response.json();
+  }
+
+  // Event Management
+  async getAllEvents() {
+    const response = await fetch(`${API_BASE_URL}/events`, {
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to get events');
+    }
+
+    return response.json();
+  }
+
+  async getEventById(id: number) {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to get event');
+    }
+
+    return response.json();
+  }
+
+  async deleteEvent(id: number) {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      method: 'DELETE',
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to delete event');
+    }
+
+    return response.json();
+  }
+
+  async updateEventStatus(id: number, status: string) {
+    const response = await fetch(`${API_BASE_URL}/events/${id}/status`, {
+      method: 'PUT',
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify({ status }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to update event status');
+    }
+
+    return response.json();
+  }
+
+  async updateEventPaymentStatus(id: number, paymentStatus: string) {
+    const response = await fetch(`${API_BASE_URL}/events/${id}/payment-status`, {
+      method: 'PUT',
+      headers: this.getAuthHeaders(),
+      body: JSON.stringify({ payment_status: paymentStatus }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to update payment status');
+    }
+
+    return response.json();
+  }
+
+  // Financial Management - Get payment data from events
+  async getPayments() {
+    const response = await fetch(`${API_BASE_URL}/events`, {
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to get payments');
+    }
+
+    const result = await response.json();
+    
+    // Transform events data to payment data format
+    const payments = result.data.map((event: any) => ({
+      id: event.id,
+      event_id: event.id,
+      event_name: event.name,
+      event_type: event.type,
+      event_date: event.date,
+      event_description: event.description,
+      customer_name: `${event.customer_firstName} ${event.customer_lastName}`,
+      customer_email: event.customer_email,
+      customer_phone: event.customer_phone,
+      vendor_name: event.vendor_name,
+      vendor_id: event.vendor_id,
+      total_amount: event.total_amount,
+      advance_amount: event.advance_amount,
+      paid_amount: event.paid_amount,
+      remaining_amount: event.remaining_amount,
+      payment_status: event.payment_status,
+      advance_percentage: event.advance_percentage,
+      services: event.services || [],
+      createdAt: event.createdAt,
+      updatedAt: event.updatedAt
+    }));
+
+    return { success: true, data: payments };
+  }
+
+  async getPaymentById(id: number) {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to get payment details');
+    }
+
+    const result = await response.json();
+    const event = result.data;
+    
+    // Transform event data to payment data format
+    const payment = {
+      id: event.id,
+      event_id: event.id,
+      event_name: event.name,
+      event_type: event.type,
+      event_date: event.date,
+      event_description: event.description,
+      customer_name: `${event.customer_firstName} ${event.customer_lastName}`,
+      customer_email: event.customer_email,
+      customer_phone: event.customer_phone,
+      vendor_name: event.vendor_name,
+      vendor_id: event.vendor_id,
+      total_amount: event.total_amount,
+      advance_amount: event.advance_amount,
+      paid_amount: event.paid_amount,
+      remaining_amount: event.remaining_amount,
+      payment_status: event.payment_status,
+      advance_percentage: event.advance_percentage,
+      services: event.services || [],
+      createdAt: event.createdAt,
+      updatedAt: event.updatedAt
+    };
+
+    return { success: true, data: payment };
+  }
+
+  async getFinancialReports() {
+    const response = await fetch(`${API_BASE_URL}/admin/financial-reports`, {
+      headers: this.getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to get financial reports');
     }
 
     return response.json();
