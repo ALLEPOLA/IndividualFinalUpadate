@@ -13,6 +13,7 @@ import EventTable from '../../components/EventTable';
 import EventDetailsModal from '../../components/EventDetailsModal';
 import PaymentTable from '../../components/PaymentTable';
 import DashboardOverview from '../../components/DashboardOverview';
+import { EventEaseLogo } from '../../components/EventEaseLogo';
 
 interface AdminDashboardProps {}
 
@@ -332,23 +333,32 @@ function AdminDashboard({}: AdminDashboardProps) {
         );
       case 'vendors':
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Vendor Management</h2>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">
-                  {vendors.length} vendor{vendors.length !== 1 ? 's' : ''} found
-                </span>
+          <div className="p-6 space-y-6 relative overflow-hidden">
+            {/* Minimal Floating Decorative Elements */}
+            <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+            <div className="absolute top-8 right-8 text-sm animate-bounce opacity-20" style={{ animationDelay: '1.5s' }}>🏢</div>
+            
+            {/* Header */}
+            <div className="flex items-center justify-between relative z-10">
+              <div>
+                <h1 className="text-3xl font-bold text-purple-700">
+                  🏢 Vendor Management
+                </h1>
+                <p className="text-gray-600 mt-1">Manage and monitor vendor accounts</p>
+                {/* Light Purple Underline */}
+                <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+              </div>
+              <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
+                {vendors.length} vendor{vendors.length !== 1 ? 's' : ''} found
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
               <div className="p-6">
                 {!moderator ? (
                   <div className="text-center py-8 text-gray-500">
-                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <div className="text-4xl mb-4">🔒</div>
                     <p>Please log in to access vendor management.</p>
                   </div>
                 ) : (
@@ -366,23 +376,32 @@ function AdminDashboard({}: AdminDashboardProps) {
         );
       case 'users':
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">User Management</h2>
-                      <div className="flex items-center space-x-4">
-                        <span className="text-sm text-gray-600">
-                          {users.length} regular user{users.length !== 1 ? 's' : ''} found
-                        </span>
-                      </div>
+          <div className="p-6 space-y-6 relative overflow-hidden">
+            {/* Minimal Floating Decorative Elements */}
+            <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+            <div className="absolute top-8 right-8 text-sm animate-bounce opacity-20" style={{ animationDelay: '1.5s' }}>👥</div>
+            
+            {/* Header */}
+            <div className="flex items-center justify-between relative z-10">
+              <div>
+                <h1 className="text-3xl font-bold text-purple-700">
+                  👥 User Management
+                </h1>
+                <p className="text-gray-600 mt-1">Manage and monitor user accounts</p>
+                {/* Light Purple Underline */}
+                <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+              </div>
+              <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
+                {users.length} regular user{users.length !== 1 ? 's' : ''} found
+              </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
               <div className="p-6">
                 {!moderator ? (
                   <div className="text-center py-8 text-gray-500">
-                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <div className="text-4xl mb-4">🔒</div>
                     <p>Please log in to access user management.</p>
                   </div>
                 ) : (
@@ -400,23 +419,32 @@ function AdminDashboard({}: AdminDashboardProps) {
         );
       case 'events':
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Event Management</h2>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">
-                  {events.length} event{events.length !== 1 ? 's' : ''} found
-                </span>
+          <div className="p-6 space-y-6 relative overflow-hidden">
+            {/* Minimal Floating Decorative Elements */}
+            <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+            <div className="absolute top-8 right-8 text-sm animate-bounce opacity-20" style={{ animationDelay: '1.5s' }}>📅</div>
+            
+            {/* Header */}
+            <div className="flex items-center justify-between relative z-10">
+              <div>
+                <h1 className="text-3xl font-bold text-purple-700">
+                  📅 Event Management
+                </h1>
+                <p className="text-gray-600 mt-1">Manage and monitor all events</p>
+                {/* Light Purple Underline */}
+                <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+              </div>
+              <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
+                {events.length} event{events.length !== 1 ? 's' : ''} found
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
               <div className="p-6">
                 {!moderator ? (
                   <div className="text-center py-8 text-gray-500">
-                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                    </svg>
+                    <div className="text-4xl mb-4">🔒</div>
                     <p>Please log in to access event management.</p>
                   </div>
                 ) : (
@@ -434,23 +462,32 @@ function AdminDashboard({}: AdminDashboardProps) {
         );
       case 'financial':
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">Financial Management</h2>
-              <div className="flex items-center space-x-4">
-                <span className="text-sm text-gray-600">
-                  {payments.length} payment{payments.length !== 1 ? 's' : ''} found
-                </span>
+          <div className="p-6 space-y-6 relative overflow-hidden">
+            {/* Minimal Floating Decorative Elements */}
+            <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+            <div className="absolute top-8 right-8 text-sm animate-bounce opacity-20" style={{ animationDelay: '1.5s' }}>💰</div>
+            
+            {/* Header */}
+            <div className="flex items-center justify-between relative z-10">
+              <div>
+                <h1 className="text-3xl font-bold text-purple-700">
+                  💰 Financial Management
+                </h1>
+                <p className="text-gray-600 mt-1">Monitor payments and financial transactions</p>
+                {/* Light Purple Underline */}
+                <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+              </div>
+              <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
+                {payments.length} payment{payments.length !== 1 ? 's' : ''} found
               </div>
             </div>
 
-            <div className="bg-white rounded-lg shadow">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
               <div className="p-6">
                 {!moderator ? (
                   <div className="text-center py-8 text-gray-500">
-                    <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                    </svg>
+                    <div className="text-4xl mb-4">🔒</div>
                     <p>Please log in to access financial management.</p>
                   </div>
                 ) : (
@@ -465,55 +502,67 @@ function AdminDashboard({}: AdminDashboardProps) {
         );
       case 'system':
         return (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">System Administration</h2>
+          <div className="p-6 space-y-6 relative overflow-hidden">
+            {/* Minimal Floating Decorative Elements */}
+            <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
+            <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
+            <div className="absolute top-8 right-8 text-sm animate-bounce opacity-20" style={{ animationDelay: '1.5s' }}>⚙️</div>
+            
+            {/* Header */}
+            <div className="flex items-center justify-between relative z-10">
+              <div>
+                <h1 className="text-3xl font-bold text-purple-700">
+                  ⚙️ System Administration
+                </h1>
+                <p className="text-gray-600 mt-1">Manage moderators and system settings</p>
+                {/* Light Purple Underline */}
+                <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
+              </div>
               {moderator && (
                 <button
                   onClick={() => setIsCreateModalOpen(true)}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors flex items-center"
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-purple-500/30 border-2 border-purple-400 hover:scale-105 flex items-center space-x-2"
                 >
-                  <svg className="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                  </svg>
-                  Create Moderator
+                  <span className="text-lg">➕</span>
+                  <span>Create Moderator</span>
                 </button>
               )}
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Moderator Management</h3>
-              
-              {!moderator ? (
-                <div className="text-center py-8 text-gray-500">
-                  <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                  <p>Please log in to access moderator management.</p>
-                </div>
-              ) : isLoadingModerators ? (
-                <div className="flex items-center justify-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
-                  <span className="ml-2 text-gray-600">Loading moderators...</span>
-                </div>
-              ) : moderators.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                  <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                  </svg>
-                  <p>No moderators found. Create your first moderator to get started.</p>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {moderators.map((mod) => (
-                    <ModeratorCard
-                      key={mod.id}
-                      moderator={mod}
-                      onDeactivate={handleDeactivateModerator}
-                    />
-                  ))}
-                </div>
-              )}
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
+              <div className="p-6">
+                <h3 className="text-lg font-semibold text-purple-700 mb-4 flex items-center">
+                  <span className="mr-2">👥</span>
+                  Moderator Management
+                </h3>
+                
+                {!moderator ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <div className="text-4xl mb-4">🔒</div>
+                    <p>Please log in to access moderator management.</p>
+                  </div>
+                ) : isLoadingModerators ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
+                    <span className="ml-2 text-gray-600">Loading moderators...</span>
+                  </div>
+                ) : moderators.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <div className="text-4xl mb-4">👥</div>
+                    <p>No moderators found. Create your first moderator to get started.</p>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {moderators.map((mod) => (
+                      <ModeratorCard
+                        key={mod.id}
+                        moderator={mod}
+                        onDeactivate={handleDeactivateModerator}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         );
@@ -523,26 +572,44 @@ function AdminDashboard({}: AdminDashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="h-8 w-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center mr-3">
-                <span className="text-white font-bold">A</span>
-              </div>
-              <h1 className="text-xl font-semibold text-gray-900">EventEase Admin</h1>
+      <header className="bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200 backdrop-blur-sm shadow-lg border-b-2 border-purple-400 px-6 py-4 relative overflow-hidden">
+        {/* Very Colorful Floating Elements */}
+        <div className="absolute top-2 left-12 text-xl animate-bounce opacity-70" style={{ animationDelay: '1s' }}>✨</div>
+        <div className="absolute top-3 right-20 text-xl animate-bounce opacity-70" style={{ animationDelay: '2s' }}>🌟</div>
+        <div className="absolute top-4 left-40 text-lg animate-bounce opacity-60" style={{ animationDelay: '3s' }}>💫</div>
+        <div className="absolute bottom-2 right-12 text-lg animate-bounce opacity-60" style={{ animationDelay: '4s' }}>⭐</div>
+        <div className="absolute bottom-3 left-24 text-sm animate-bounce opacity-50" style={{ animationDelay: '5s' }}>👑</div>
+        <div className="absolute top-5 right-40 text-sm animate-bounce opacity-50" style={{ animationDelay: '6s' }}>🎊</div>
+        
+        <div className="flex items-center justify-between relative z-10">
+          {/* Logo */}
+          <div className="flex items-center">
+            <EventEaseLogo />
+            <span className="ml-4 text-lg font-semibold text-purple-700">Admin Portal</span>
+          </div>
+
+          {/* User Info and Actions */}
+          <div className="flex items-center space-x-6">
+            {/* User Info */}
+            <div className="text-right">
+              <p className="text-sm font-bold bg-gradient-to-r from-purple-700 via-pink-600 to-purple-700 bg-clip-text text-transparent animate-pulse">
+                Welcome, {moderator?.firstName || 'Admin'}! 👋
+              </p>
+              <p className="text-xs text-purple-700 font-semibold">{moderator?.email || 'admin@eventease.com'}</p>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Welcome, {moderator?.firstName || 'Admin'}</span>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-              >
-                Logout
-              </button>
-            </div>
+
+            {/* Logout Button */}
+            <button
+              onClick={handleLogout}
+              className="bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-xl text-sm font-semibold hover:from-red-600 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-red-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-red-500/30 border-2 border-red-400 hover:scale-110 hover:rotate-1"
+            >
+              <span className="flex items-center space-x-2">
+                <span className="text-lg">🚪</span>
+                <span>Logout</span>
+              </span>
+            </button>
           </div>
         </div>
       </header>

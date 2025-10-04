@@ -56,7 +56,8 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
                 </span>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-purple-700 flex items-center">
+                  <span className="mr-2">👤</span>
                   {user.firstName} {user.middleName && `${user.middleName} `}{user.lastName}
                 </h2>
                 <p className="text-gray-600">Regular User Details</p>
@@ -64,11 +65,9 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-gray-400 hover:text-gray-600 transition-colors hover:scale-110"
             >
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <span className="text-2xl">✕</span>
             </button>
           </div>
 
@@ -76,7 +75,10 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             {/* Personal Information */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">👤</span>
+                  Personal Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Full Name</label>
@@ -105,7 +107,10 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Contact Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">📞</span>
+                  Contact Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Email Address</label>
@@ -128,7 +133,10 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             <div className="space-y-6">
               {/* Account Status */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Status</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">🔐</span>
+                  Account Status
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Email Verification</label>
@@ -147,7 +155,10 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Timestamps */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Account Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">⏰</span>
+                  Account Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Account Created</label>
@@ -166,7 +177,10 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Role Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Role Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">🎭</span>
+                  Role Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">User Role</label>
@@ -193,9 +207,12 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
           <div className="flex justify-end space-x-4 pt-6 border-t mt-6">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-6 py-3 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
             >
-              Close
+              <span className="flex items-center">
+                <span className="mr-2">✕</span>
+                Close
+              </span>
             </button>
           </div>
         </div>

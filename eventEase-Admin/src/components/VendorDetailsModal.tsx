@@ -49,17 +49,18 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
                 </span>
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">{vendor.businessName}</h2>
+                <h2 className="text-2xl font-bold text-purple-700 flex items-center">
+                  <span className="mr-2">🏢</span>
+                  {vendor.businessName}
+                </h2>
                 <p className="text-gray-600">Vendor Details</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-gray-400 hover:text-gray-600 transition-colors hover:scale-110"
             >
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <span className="text-2xl">✕</span>
             </button>
           </div>
 
@@ -67,7 +68,10 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
             {/* Business Information */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Business Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">🏢</span>
+                  Business Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Business Name</label>
@@ -86,7 +90,10 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
 
               {/* Contact Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">📞</span>
+                  Contact Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Owner Name</label>
@@ -123,7 +130,10 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
             <div className="space-y-6">
               {/* Location */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Location</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">📍</span>
+                  Location
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Address</label>
@@ -146,7 +156,10 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
 
               {/* Legal Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Legal Information</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">📋</span>
+                  Legal Information
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Business Registration Number</label>
@@ -161,7 +174,10 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
 
               {/* Timestamps */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Timestamps</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <span className="mr-2">⏰</span>
+                  Timestamps
+                </h3>
                 <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Created</label>
@@ -184,9 +200,12 @@ const VendorDetailsModal: React.FC<VendorDetailsModalProps> = ({
           <div className="flex justify-end space-x-4 pt-6 border-t mt-6">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-6 py-3 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
             >
-              Close
+              <span className="flex items-center">
+                <span className="mr-2">✕</span>
+                Close
+              </span>
             </button>
           </div>
         </div>

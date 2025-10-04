@@ -31,9 +31,15 @@ const UserTable: React.FC<UserTableProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-8">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
-        <span className="ml-2 text-gray-600">Loading users...</span>
+      <div className="p-6">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 rounded w-1/4 mb-6"></div>
+          <div className="space-y-4">
+            {[1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="bg-gray-200 rounded-lg h-16"></div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -41,9 +47,7 @@ const UserTable: React.FC<UserTableProps> = ({
   if (users.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500">
-        <svg className="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-        </svg>
+        <div className="text-4xl mb-4">👥</div>
         <p>No regular users found.</p>
       </div>
     );
@@ -72,28 +76,46 @@ const UserTable: React.FC<UserTableProps> = ({
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              User
+              <span className="flex items-center">
+                <span className="mr-2">👤</span>
+                User
+              </span>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Contact
+              <span className="flex items-center">
+                <span className="mr-2">📞</span>
+                Contact
+              </span>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Role
+              <span className="flex items-center">
+                <span className="mr-2">🎭</span>
+                Role
+              </span>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Email Status
+              <span className="flex items-center">
+                <span className="mr-2">📧</span>
+                Email Status
+              </span>
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Created
+              <span className="flex items-center">
+                <span className="mr-2">📅</span>
+                Created
+              </span>
             </th>
             <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Actions
+              <span className="flex items-center justify-end">
+                <span className="mr-2">⚙️</span>
+                Actions
+              </span>
             </th>
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
           {users.map((user) => (
-            <tr key={user.id} className="hover:bg-gray-50 transition-colors">
+            <tr key={user.id} className="hover:bg-gray-50 transition-colors duration-200">
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="h-10 w-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-3">
@@ -132,23 +154,18 @@ const UserTable: React.FC<UserTableProps> = ({
                 <div className="flex items-center justify-end space-x-2">
                   <button
                     onClick={() => onView(user)}
-                    className="text-blue-600 hover:text-blue-900 hover:bg-blue-50 p-2 rounded-md transition-colors"
+                    className="text-blue-600 hover:text-blue-900 hover:bg-blue-50 p-2 rounded-md transition-all duration-200 hover:scale-105"
                     title="View Details"
                   >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                    </svg>
+                    <span className="text-lg">👁️</span>
                   </button>
                   {canManageUsers && (
                     <button
                       onClick={() => onDelete(user)}
-                      className="text-red-600 hover:text-red-900 hover:bg-red-50 p-2 rounded-md transition-colors"
+                      className="text-red-600 hover:text-red-900 hover:bg-red-50 p-2 rounded-md transition-all duration-200 hover:scale-105"
                       title="Delete User"
                     >
-                      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
+                      <span className="text-lg">🗑️</span>
                     </button>
                   )}
                 </div>
