@@ -18,7 +18,7 @@ interface SignupFormData {
   // Vendor fields (optional)
   businessName?: string;
   description?: string;
-  address?: string;
+  // address?: string;
   city?: string;
   province?: string;
   postalCode?: string;
@@ -365,25 +365,7 @@ function Signup() {
                   )}
                 </div>
 
-                {/* Address */}
-                <div>
-                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                    Business Address *
-                  </label>
-                  <input
-                    {...register('address', {
-                      required: selectedRole === 'vendor' ? 'Business address is required' : false,
-                    })}
-                    type="text"
-                    className={`mt-1 block w-full px-4 py-3 border-2 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 group-hover:shadow-md ${
-                      errors.address ? 'border-red-300' : 'border-gray-300'
-                    }`}
-                    placeholder="Enter your business address"
-                  />
-                  {errors.address && (
-                    <p className="mt-1 text-sm text-red-600">{errors.address.message}</p>
-                  )}
-                </div>
+              
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* City */}

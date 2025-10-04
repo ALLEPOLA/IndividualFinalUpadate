@@ -12,6 +12,7 @@ import UserDetailsModal from '../../components/UserDetailsModal';
 import EventTable from '../../components/EventTable';
 import EventDetailsModal from '../../components/EventDetailsModal';
 import PaymentTable from '../../components/PaymentTable';
+import DashboardOverview from '../../components/DashboardOverview';
 
 interface AdminDashboardProps {}
 
@@ -45,6 +46,10 @@ function AdminDashboard({}: AdminDashboardProps) {
   // Payment management state
   const [payments, setPayments] = useState<any[]>([]);
   const [isLoadingPayments, setIsLoadingPayments] = useState(false);
+
+  // Dashboard analytics state
+  const [dashboardStats, setDashboardStats] = useState<any>(null);
+  const [isLoadingStats, setIsLoadingStats] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -83,6 +88,13 @@ function AdminDashboard({}: AdminDashboardProps) {
   useEffect(() => {
     if (activeSection === 'financial' && moderator) {
       loadPayments();
+    }
+  }, [activeSection, moderator]);
+
+  // Load dashboard stats when overview section is active and user is authenticated
+  useEffect(() => {
+    if (activeSection === 'overview' && moderator) {
+      loadDashboardStats();
     }
   }, [activeSection, moderator]);
 
@@ -246,6 +258,19 @@ function AdminDashboard({}: AdminDashboardProps) {
     }
   };
 
+  // Dashboard analytics functions
+  const loadDashboardStats = async () => {
+    try {
+      setIsLoadingStats(true);
+      const response = await adminService.getDashboardStats();
+      setDashboardStats(response.data);
+    } catch (error) {
+      console.error('Failed to load dashboard stats:', error);
+    } finally {
+      setIsLoadingStats(false);
+    }
+  };
+
   const menuItems = [
     {
       id: 'overview',
@@ -290,57 +315,19 @@ function AdminDashboard({}: AdminDashboardProps) {
       case 'overview':
         return (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-900">Dashboard Overview</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="flex items-center">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <span className="text-2xl">👥</span>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Total Users</p>
-                    <p className="text-2xl font-semibold text-gray-900">1,234</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="flex items-center">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <span className="text-2xl">🏢</span>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Active Vendors</p>
-                    <p className="text-2xl font-semibold text-gray-900">89</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="flex items-center">
-                  <div className="p-2 bg-purple-100 rounded-lg">
-                    <span className="text-2xl">🎉</span>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Total Events</p>
-                    <p className="text-2xl font-semibold text-gray-900">456</p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="flex items-center">
-                  <div className="p-2 bg-yellow-100 rounded-lg">
-                    <span className="text-2xl">💰</span>
-                  </div>
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Revenue</p>
-                    <p className="text-2xl font-semibold text-gray-900">$12,345</p>
-                  </div>
-                </div>
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">Dashboard Overview</h2>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  Last updated: {new Date().toLocaleString()}
+                </span>
               </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
-              <p className="text-gray-600">No recent activity to display.</p>
-            </div>
+
+            <DashboardOverview
+              stats={dashboardStats}
+              isLoading={isLoadingStats}
+            />
           </div>
         );
       case 'vendors':

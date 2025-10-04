@@ -6,7 +6,7 @@ class User {
     this.firstName = userData.firstName;
     this.middleName = userData.middleName || null;
     this.lastName = userData.lastName;
-    this.address = userData.address || null;
+    // this.address = userData.address || null;
     this.phone = userData.phone;
     this.role = userData.role;
     this.email = userData.email;
@@ -196,7 +196,7 @@ class User {
       firstName: this.firstName,
       middleName: this.middleName,
       lastName: this.lastName,
-      address: this.address,
+      // address: this.address,
       phone: this.phone,
       role: this.role,
       email: this.email,

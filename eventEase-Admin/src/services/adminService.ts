@@ -386,6 +386,68 @@ class AdminService {
 
     return response.json();
   }
+
+  // Dashboard Analytics
+  async getDashboardStats() {
+    try {
+      // Fetch all data in parallel
+      const [eventsResponse, usersResponse, vendorsResponse] = await Promise.all([
+        fetch(`${API_BASE_URL}/events`, { headers: this.getAuthHeaders() }),
+        fetch(`${API_BASE_URL}/users`, { headers: this.getAuthHeaders() }),
+        fetch(`${API_BASE_URL}/vendors`, { headers: this.getAuthHeaders() })
+      ]);
+
+      if (!eventsResponse.ok || !usersResponse.ok || !vendorsResponse.ok) {
+        throw new Error('Failed to fetch dashboard data');
+      }
+
+      const [eventsData, usersData, vendorsData] = await Promise.all([
+        eventsResponse.json(),
+        usersResponse.json(),
+        vendorsResponse.json()
+      ]);
+
+      const events = eventsData.data || [];
+      const users = usersData.data || [];
+      const vendors = vendorsData.data || [];
+
+      // Calculate analytics
+      const totalEvents = events.length;
+      const totalUsers = users.length;
+      const totalVendors = vendors.length;
+
+      // Event status breakdown
+      const pendingEvents = events.filter((e: any) => e.status === 'pending').length;
+      const confirmedEvents = events.filter((e: any) => e.status === 'confirmed').length;
+      const cancelledEvents = events.filter((e: any) => e.status === 'cancelled').length;
+
+      // Payment status breakdown
+      const pendingPayments = events.filter((e: any) => e.payment_status === 'pending').length;
+      const paidPayments = events.filter((e: any) => e.payment_status === 'fully_paid' || e.payment_status === 'advance_paid').length;
+
+      // Recent events (last 10, sorted by date)
+      const recentEvents = events
+        .sort((a: any, b: any) => new Date(b.date || b.createdAt).getTime() - new Date(a.date || a.createdAt).getTime())
+        .slice(0, 10);
+
+      const stats = {
+        totalEvents,
+        totalUsers,
+        totalVendors,
+        pendingEvents,
+        confirmedEvents,
+        cancelledEvents,
+        pendingPayments,
+        paidPayments,
+        recentEvents
+      };
+
+      return { success: true, data: stats };
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+      throw new Error('Failed to fetch dashboard analytics');
+    }
+  }
 }
 
 export const adminService = new AdminService();

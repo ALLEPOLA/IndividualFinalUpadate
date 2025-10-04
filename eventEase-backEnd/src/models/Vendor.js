@@ -6,7 +6,7 @@ class Vendor {
     this.userId = vendorData.userId;
     this.businessName = vendorData.businessName;
     this.description = vendorData.description;
-    this.address = vendorData.address;
+    // this.address = vendorData.address;
     this.city = vendorData.city;
     this.province = vendorData.province;
     this.postalCode = vendorData.postalCode;
@@ -33,7 +33,7 @@ class Vendor {
         userId,
         businessName,
         description,
-        address,
+        // address,
         city,
         province,
         postalCode,
@@ -44,7 +44,7 @@ class Vendor {
       } = vendorData;
 
       // Validate required fields
-      if (!userId || !businessName || !description || !address || !city || 
+      if (!userId || !businessName || !description  || !city || 
           !province || !postalCode || !capacity || !businessRegistrationNumber || 
           !businessLicenseNumber) {
         throw new Error('All required vendor fields must be provided');
@@ -63,7 +63,7 @@ class Vendor {
 
       const [result] = await pool.execute(
         `INSERT INTO vendors (
-          userId, businessName, description, address, city, province, 
+          userId, businessName, description,city, province, 
           postalCode, capacity, websiteUrl, businessRegistrationNumber, 
           businessLicenseNumber
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -71,7 +71,7 @@ class Vendor {
           userId,
           businessName,
           description,
-          address,
+          // address,
           city,
           province,
           postalCode,
@@ -87,7 +87,7 @@ class Vendor {
         userId,
         businessName,
         description,
-        address,
+        // address,
         city,
         province,
         postalCode,
@@ -141,7 +141,7 @@ class Vendor {
   static async update(id, updateData) {
     try {
       const allowedFields = [
-        'businessName', 'description', 'address', 'city', 'province',
+        'businessName', 'description', 'city', 'province',
         'postalCode', 'capacity', 'websiteUrl', 'businessRegistrationNumber',
         'businessLicenseNumber'
       ];
@@ -272,7 +272,7 @@ class Vendor {
       userId: this.userId,
       businessName: this.businessName,
       description: this.description,
-      address: this.address,
+      // address: this.address,
       city: this.city,
       province: this.province,
       postalCode: this.postalCode,
