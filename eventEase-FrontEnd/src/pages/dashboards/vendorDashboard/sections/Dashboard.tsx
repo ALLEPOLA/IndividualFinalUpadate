@@ -172,18 +172,6 @@ export const Dashboard = () => {
               <span className="text-sm text-gray-600">Last Month Revenue</span>
               <span className="font-semibold text-gray-900">{formatCurrency(businessGrowth.lastMonthRevenue)}</span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Revenue Growth</span>
-              <span className={`font-semibold ${businessGrowth.revenueGrowth >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {businessGrowth.revenueGrowth >= 0 ? '+' : ''}{formatPercentage(businessGrowth.revenueGrowth)}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">Event Growth</span>
-              <span className={`font-semibold ${businessGrowth.eventGrowth >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {businessGrowth.eventGrowth >= 0 ? '+' : ''}{formatPercentage(businessGrowth.eventGrowth)}
-              </span>
-            </div>
           </div>
         </div>
 

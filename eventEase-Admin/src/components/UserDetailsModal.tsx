@@ -45,8 +45,8 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto border border-purple-200">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
@@ -75,11 +75,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             {/* Personal Information */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">👤</span>
-                  Personal Information
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 space-y-3 border border-blue-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Full Name</label>
                     <p className="text-sm text-gray-900">
@@ -107,11 +103,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Contact Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">📞</span>
-                  Contact Information
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 space-y-3 border border-green-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Email Address</label>
                     <div className="flex items-center space-x-2">
@@ -133,11 +125,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
             <div className="space-y-6">
               {/* Account Status */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">🔐</span>
-                  Account Status
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-4 space-y-3 border border-orange-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Email Verification</label>
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getEmailVerificationColor(user.emailVerified)}`}>
@@ -155,11 +143,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Timestamps */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">⏰</span>
-                  Account Information
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg p-4 space-y-3 border border-red-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Account Created</label>
                     <p className="text-sm text-gray-900">
@@ -177,11 +161,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
               {/* Role Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <span className="mr-2">🎭</span>
-                  Role Information
-                </h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4 space-y-3 border border-purple-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">User Role</label>
                     <div className="flex items-center space-x-2">
@@ -207,7 +187,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
           <div className="flex justify-end space-x-4 pt-6 border-t mt-6">
             <button
               onClick={onClose}
-              className="px-6 py-3 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-300 hover:scale-105"
+              className="px-6 py-3 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
             >
               <span className="flex items-center">
                 <span className="mr-2">✕</span>

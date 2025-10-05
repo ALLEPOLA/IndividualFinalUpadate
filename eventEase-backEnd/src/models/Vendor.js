@@ -6,7 +6,7 @@ class Vendor {
     this.userId = vendorData.userId;
     this.businessName = vendorData.businessName;
     this.description = vendorData.description;
-    // this.address = vendorData.address;
+    this.address = vendorData.address;
     this.city = vendorData.city;
     this.province = vendorData.province;
     this.postalCode = vendorData.postalCode;
@@ -33,7 +33,7 @@ class Vendor {
         userId,
         businessName,
         description,
-        // address,
+        address,
         city,
         province,
         postalCode,
@@ -63,7 +63,7 @@ class Vendor {
 
       const [result] = await pool.execute(
         `INSERT INTO vendors (
-          userId, businessName, description,city, province, 
+          userId, businessName, description, address, city, province, 
           postalCode, capacity, websiteUrl, businessRegistrationNumber, 
           businessLicenseNumber
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
@@ -71,7 +71,7 @@ class Vendor {
           userId,
           businessName,
           description,
-          // address,
+          address || null,
           city,
           province,
           postalCode,
@@ -87,7 +87,7 @@ class Vendor {
         userId,
         businessName,
         description,
-        // address,
+        address,
         city,
         province,
         postalCode,
@@ -272,7 +272,7 @@ class Vendor {
       userId: this.userId,
       businessName: this.businessName,
       description: this.description,
-      // address: this.address,
+      address: this.address,
       city: this.city,
       province: this.province,
       postalCode: this.postalCode,

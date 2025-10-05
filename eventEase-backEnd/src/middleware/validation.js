@@ -58,9 +58,6 @@ const validateSignup = (req, res, next) => {
     if (!description || description.trim().length === 0) {
       errors.push('Business description is required for vendors');
     }
-    if (!address || address.trim().length === 0) {
-      errors.push('Business address is required for vendors');
-    }
     if (!city || city.trim().length === 0) {
       errors.push('City is required for vendors');
     }

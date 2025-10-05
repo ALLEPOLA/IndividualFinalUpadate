@@ -6,7 +6,6 @@ class User {
     this.firstName = userData.firstName;
     this.middleName = userData.middleName || null;
     this.lastName = userData.lastName;
-    // this.address = userData.address || null;
     this.phone = userData.phone;
     this.role = userData.role;
     this.email = userData.email;
@@ -50,7 +49,7 @@ class User {
   // Create new user
   static async create(userData) {
     try {
-      const { firstName, lastName,middleName,adress, phone, role, email, password, emailVerified = false } = userData;
+      const { firstName, lastName, middleName, phone, role, email, password, emailVerified = false } = userData;
       
       // Validate required fields
       if (!firstName || !lastName || !phone || !role || !email || !password) {
@@ -69,16 +68,15 @@ class User {
       }
 
       const [result] = await pool.execute(
-        'INSERT INTO users (firstName, lastName, phone,adress, role, email, password, email_verified) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [firstName, lastName, phone, role, email, password, emailVerified]
+        'INSERT INTO users (firstName, lastName, middleName, phone, role, email, password, email_verified) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [firstName, lastName, middleName || null, phone, role, email, password, emailVerified]
       );
 
       return {
         id: result.insertId,
         firstName,
-        middleName,
         lastName,
-        adress,
+        middleName: middleName || null,
         phone,
         role,
         email,
@@ -196,7 +194,6 @@ class User {
       firstName: this.firstName,
       middleName: this.middleName,
       lastName: this.lastName,
-      // address: this.address,
       phone: this.phone,
       role: this.role,
       email: this.email,

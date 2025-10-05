@@ -34,11 +34,10 @@ const signUp = async (req, res) => {
       role, 
       email, 
       password,
-      // address,
+      address,
       // Vendor-specific fields
       businessName,
       description,
-     
       city,
       province,
       postalCode,
@@ -94,12 +93,12 @@ const signUp = async (req, res) => {
         userId: newUser.id,
         businessName,
         description,
-        // address,
+        address: address || null,
         city,
         province,
         postalCode,
-        capacity: parseInt(capacity),
-        websiteUrl,
+        capacity: parseInt(capacity) || 0,
+        websiteUrl: websiteUrl || null,
         businessRegistrationNumber,
         businessLicenseNumber
       };

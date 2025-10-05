@@ -61,7 +61,18 @@ class MigrationRunner {
 
       for (const statement of statements) {
         if (statement.trim()) {
-          await connection.execute(statement);
+          try {
+            await connection.execute(statement);
+          } catch (statementError) {
+            // Ignore "duplicate column" errors for ALTER TABLE ADD COLUMN statements
+            if (statementError.code === 'ER_DUP_FIELDNAME' || 
+                statementError.message.includes('Duplicate column name')) {
+              console.log(`⚠️  Column already exists, skipping: ${statement.substring(0, 50)}...`);
+              continue;
+            }
+            // Re-throw other errors
+            throw statementError;
+          }
         }
       }
 

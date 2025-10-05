@@ -155,19 +155,7 @@ export const Analytics = () => {
         {businessInsights?.businessGrowth && (
           <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-200 shadow-lg mb-8">
             <h3 className="text-xl font-bold text-indigo-800 mb-4">📈 Business Growth</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="text-center">
-                <p className="text-indigo-600 text-sm font-medium">Revenue Growth</p>
-                <p className={`text-2xl font-bold ${getGrowthColor(businessInsights.businessGrowth.revenueGrowth)}`}>
-                  {getGrowthIcon(businessInsights.businessGrowth.revenueGrowth)} {formatPercentage(businessInsights.businessGrowth.revenueGrowth)}
-                </p>
-              </div>
-              <div className="text-center">
-                <p className="text-indigo-600 text-sm font-medium">Event Growth</p>
-                <p className={`text-2xl font-bold ${getGrowthColor(businessInsights.businessGrowth.eventGrowth)}`}>
-                  {getGrowthIcon(businessInsights.businessGrowth.eventGrowth)} {formatPercentage(businessInsights.businessGrowth.eventGrowth)}
-                </p>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
               <div className="text-center">
                 <p className="text-indigo-600 text-sm font-medium">This Month Revenue</p>
                 <p className="text-2xl font-bold text-indigo-800">{formatCurrency(businessInsights.businessGrowth.currentMonthRevenue)}</p>

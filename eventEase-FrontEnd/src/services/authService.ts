@@ -77,6 +77,7 @@ export type { User, Vendor } from '../stores/userStore';
 export interface SignupData {
   firstName: string;
   lastName: string;
+  middleName?: string;
   phone: string;
   role: 'user' | 'vendor' | 'admin';
   email: string;

@@ -93,8 +93,8 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-gradient-to-br from-white to-indigo-50 rounded-lg shadow-xl max-w-5xl w-full max-h-[90vh] overflow-y-auto border border-purple-200">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center">
@@ -122,8 +122,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
             {/* Event Information */}
             <div className="space-y-6">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Event Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 space-y-3 border border-blue-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Event Name</label>
                     <p className="text-sm text-gray-900">{event.name}</p>
@@ -145,8 +144,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
               {/* Date & Time */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Date & Time</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-4 space-y-3 border border-green-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Event Date</label>
                     <p className="text-sm text-gray-900">{formatDate(event.date)}</p>
@@ -170,8 +168,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
               {/* Customer Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Customer Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-lg p-4 space-y-3 border border-orange-200 shadow-sm">
                   {event.user ? (
                     <>
                       <div>
@@ -198,8 +195,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
             <div className="space-y-6">
               {/* Vendor Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Vendor Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-lg p-4 space-y-3 border border-red-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Vendor</label>
                     <p className="text-sm text-gray-900">
@@ -217,8 +213,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
               {/* Status Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Status Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4 space-y-3 border border-purple-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Event Status</label>
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(event.status)}`}>
@@ -236,8 +231,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
               {/* Financial Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Financial Information</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg p-4 space-y-3 border border-emerald-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Total Amount</label>
                     <p className="text-sm text-gray-900 font-semibold">{formatCurrency(event.total_amount)}</p>
@@ -260,7 +254,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
               {/* Services */}
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">Services</h3>
-                <div className="bg-gray-50 rounded-lg p-4">
+                <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg p-4 border border-cyan-200 shadow-sm">
                   {event.services && event.services.length > 0 ? (
                     <div className="space-y-2">
                       {event.services.map((service, index) => (
@@ -281,8 +275,7 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
 
               {/* Timestamps */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Timestamps</h3>
-                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
+                <div className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-lg p-4 space-y-3 border border-slate-200 shadow-sm">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Created</label>
                     <p className="text-sm text-gray-900">
@@ -304,9 +297,12 @@ const EventDetailsModal: React.FC<EventDetailsModalProps> = ({
           <div className="flex justify-end space-x-4 pt-6 border-t mt-6">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="px-6 py-3 text-white bg-gradient-to-r from-red-500 to-red-600 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg"
             >
-              Close
+              <span className="flex items-center">
+                <span className="mr-2">✕</span>
+                Close
+              </span>
             </button>
           </div>
         </div>

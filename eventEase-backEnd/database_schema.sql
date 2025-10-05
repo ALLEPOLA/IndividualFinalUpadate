@@ -10,10 +10,14 @@ CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
+    middleName VARCHAR(50) NULL,
     phone VARCHAR(20) NOT NULL,
     role ENUM('user', 'vendor', 'admin') NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    email_verified BOOLEAN DEFAULT FALSE,
+    email_otp VARCHAR(6) NULL,
+    email_otp_expires DATETIME NULL,
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -135,8 +139,8 @@ INSERT IGNORE INTO users (firstName, lastName, phone, role, email, password)
 VALUES ('Regular', 'User', '1234567892', 'user', 'user@eventease.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4J/8Kz8Kz2');
 
 -- Insert sample vendor (assuming vendor user id is 2)
-INSERT IGNORE INTO vendors (userId, businessName, description, address, city, province, postalCode, capacity, websiteUrl, businessRegistrationNumber, businessLicenseNumber)
-VALUES (2, 'Elite Events Co.', 'Premium event planning and management services', '123 Event Street', 'Toronto', 'Ontario', 'M5V 3A1', 500, 'https://eliteevents.com', 'BRN123456789', 'BLN987654321');
+INSERT IGNORE INTO vendors (userId, businessName, description, city, province, postalCode, capacity, websiteUrl, businessRegistrationNumber, businessLicenseNumber)
+VALUES (2, 'Elite Events Co.', 'Premium event planning and management services', 'Toronto', 'Ontario', 'M5V 3A1', 500, 'https://eliteevents.com', 'BRN123456789', 'BLN987654321');
 
 -- Insert sample events (assuming vendor id is 1)
 INSERT IGNORE INTO events (name, description, type, date, start_time, end_time, special_requirements, vendor_id, vendor_name, services, total_amount, advance_amount, remaining_amount, advance_percentage, payment_status, status) VALUES

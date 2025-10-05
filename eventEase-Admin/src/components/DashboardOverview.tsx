@@ -84,7 +84,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
   };
 
   return (
-    <div className="p-6 space-y-6 relative overflow-hidden">
+    <div className="p-6 space-y-6 relative overflow-hidden bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg border border-purple-200">
       {/* Minimal Floating Decorative Elements */}
       <div className="absolute top-4 left-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '1s' }}>✨</div>
       <div className="absolute bottom-8 right-4 text-sm animate-bounce opacity-20" style={{ animationDelay: '2.5s' }}>⭐</div>
@@ -100,15 +100,12 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
           {/* Light Purple Underline */}
           <div className="w-20 h-0.5 bg-purple-300 rounded-full mt-2"></div>
         </div>
-        <div className="text-sm text-gray-500 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-md">
-          Last updated: {new Date().toLocaleDateString()}
-        </div>
       </div>
 
       {/* Main Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
         {/* Total Events */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
+        <div className="bg-gradient-to-br from-white to-blue-50 rounded-lg shadow-sm border border-blue-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
             <div className="p-2 bg-blue-100 rounded-lg">
               <span className="text-xl text-blue-600">📅</span>
@@ -121,7 +118,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
         </div>
 
         {/* Total Users */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
+        <div className="bg-gradient-to-br from-white to-green-50 rounded-lg shadow-sm border border-green-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
             <div className="p-2 bg-green-100 rounded-lg">
               <span className="text-xl text-green-600">👥</span>
@@ -134,7 +131,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
         </div>
 
         {/* Total Vendors */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-300">
+        <div className="bg-gradient-to-br from-white to-purple-50 rounded-lg shadow-sm border border-purple-200 p-6 hover:shadow-md transition-all duration-300">
           <div className="flex items-center">
             <div className="p-2 bg-purple-100 rounded-lg">
               <span className="text-xl text-purple-600">🏢</span>
@@ -150,7 +147,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
       {/* Secondary Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative z-10">
         {/* Event Status Breakdown */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-gradient-to-br from-white to-orange-50 rounded-lg shadow-sm border border-orange-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <span className="text-lg mr-2">📊</span>
             Event Status Breakdown
@@ -181,7 +178,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
         </div>
 
         {/* Payment Status Breakdown */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="bg-gradient-to-br from-white to-emerald-50 rounded-lg shadow-sm border border-emerald-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
             <span className="text-lg mr-2">💳</span>
             Payment Status Breakdown
@@ -213,7 +210,7 @@ const DashboardOverview: React.FC<DashboardOverviewProps> = ({ stats, isLoading 
       </div>
 
       {/* Recent Events */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 relative z-10">
+      <div className="bg-gradient-to-br from-white to-indigo-50 rounded-lg shadow-sm border border-indigo-200 relative z-10">
         <div className="px-6 py-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center">
             <span className="text-lg mr-2">📅</span>
